@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
 		return new NextResponse("Login success", {
 			status: 200,
 			headers: {
-				"Set-Cookie": `token=${accessToken}; max-age=604800; httpOnly=true; path="/"`,
+				"Set-Cookie": `token=${accessToken}; max-age=604800; httpOnly=true; path=/;`,
 			},
 		});
 	} catch (error) {

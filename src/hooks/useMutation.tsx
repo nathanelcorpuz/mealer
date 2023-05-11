@@ -9,12 +9,15 @@ export default function useMutation({
 	const [isError, setIsError] = useState(false);
 	const [isSuccess, setIsSuccess] = useState(false);
 	const [error, setError] = useState("");
+	const [data, setData] = useState({});
 
 	const mutate = async (payload: any) => {
 		setIsLoading(true);
 		try {
 			const response = await mutator(payload);
 			if (!response.ok) throw new Error(response.statusText);
+			const body = await response.text();
+			setData(JSON.parse(body));
 			setIsSuccess(true);
 		} catch (error) {
 			setIsError(true);
@@ -22,5 +25,5 @@ export default function useMutation({
 		}
 		setIsLoading(false);
 	};
-	return { isLoading, isError, error, mutate, isSuccess };
+	return { isLoading, isError, error, mutate, isSuccess, data };
 }

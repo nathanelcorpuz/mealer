@@ -1,6 +1,7 @@
 import { cookies as getCookies } from "next/headers";
 import jwt from "jsonwebtoken";
 import User from "@/db/models/User";
+import connectMongo from "@/db/connectMongo";
 
 export default async function tokenVerifier() {
 	const cookies = getCookies();
@@ -14,7 +15,11 @@ export default async function tokenVerifier() {
 
 	if (!user) throw new Error("Invalid token");
 
+	await connectMongo();
+
 	const userDoc = await User.findById(user.userId);
+
+	console.log("resource protected!");
 
 	return userDoc;
 }

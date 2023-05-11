@@ -13,16 +13,8 @@ export default function useQuery(url: string) {
 		setIsLoading(true);
 		try {
 			const response = await fetch(url);
-			console.log("\n\n");
-			console.log("response");
-			console.log(response);
-			console.log("\n\n");
-			const body = await response.text();
-			console.log("\n\n");
-			console.log("body");
-			console.log(body);
-			console.log("\n\n");
 			if (!response.ok) throw new Error(response.statusText);
+			const body = await response.text();
 			setData(JSON.parse(body));
 			setIsSuccess(true);
 		} catch (error) {

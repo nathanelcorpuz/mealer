@@ -1,9 +1,5 @@
-"use server";
-
-import Profile from "./Profile";
-
 export default async function ProfilePage() {
-	const response = await fetch("http://localhost:3000/api/sample-route");
+	const response = await fetch("http://localhost:3000/api/sample-protected-route");
 	const result = await response.json();
 
 	console.log("\n\n");
@@ -11,5 +7,5 @@ export default async function ProfilePage() {
 	console.log(result);
 	console.log("\n\n");
 
-	return <Profile />;
+	return <main>Profile</main>
 }

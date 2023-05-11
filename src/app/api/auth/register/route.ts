@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
-import connectMongo from "@/server/connectMongo";
-import User from "@/server/models/User";
+import connectMongo from "@/db/connectMongo";
+import User from "@/db/models/User";
 import { NextResponse } from "next/server";
 import { routeHandlerError } from "@/lib/routeHandlerError";
 

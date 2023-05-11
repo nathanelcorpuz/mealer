@@ -7,6 +7,7 @@ export default function useMutation({
 }) {
 	const [isLoading, setIsLoading] = useState(false);
 	const [isError, setIsError] = useState(false);
+	const [isSuccess, setIsSuccess] = useState(false);
 	const [error, setError] = useState("");
 
 	const mutate = async (payload: any) => {
@@ -14,11 +15,12 @@ export default function useMutation({
 		try {
 			const response = await mutator(payload);
 			if (!response.ok) throw new Error(response.statusText);
+			setIsSuccess(true);
 		} catch (error) {
 			setIsError(true);
 			setError((error as Error).message);
 		}
 		setIsLoading(false);
 	};
-	return { isLoading, isError, error, mutate };
+	return { isLoading, isError, error, mutate, isSuccess };
 }

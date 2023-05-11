@@ -20,6 +20,7 @@ export default function RootLayout({
 				<div className="flex gap-[50px] p-4 bg-gray-400">
 					<Link href="/">Home</Link>
 					<Link href="/auth/register">register</Link>
+					<Link href="/auth/login">login</Link>
 					<Link href="profile">profile</Link>
 				</div>
 				{children}

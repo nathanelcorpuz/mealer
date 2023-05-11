@@ -1,18 +1,15 @@
 "use client";
 
 import useMutation from "@/hooks/useMutation";
+import { loginMutator as mutator } from "@/lib/mutators";
 import { useState } from "react";
-import { registerMutator as mutator } from "@/lib/mutators";
-import { Credentials } from "@/lib/types";
 
-export default function Register() {
+export default function Login() {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const mutation = useMutation({ mutator });
 
-	const credentials: Credentials = { username, password };
-
-	if (mutation.isLoading) return <p>Loading</p>;
+	if (mutation.isLoading) return <p>Logging you in</p>;
 
 	return (
 		<main>
@@ -20,7 +17,7 @@ export default function Register() {
 				className="flex flex-col gap-[20px] max-w-[800px]"
 				onSubmit={(e) => {
 					e.preventDefault();
-					mutation.mutate(credentials);
+					mutation.mutate({ username, password });
 				}}
 			>
 				<div className="flex flex-col">
@@ -41,7 +38,7 @@ export default function Register() {
 						onChange={(e) => setPassword(e.target.value)}
 					/>
 				</div>
-				<button>Register</button>
+				<button>Login</button>
 			</form>
 			{mutation.isError && <p>{mutation.error as string}</p>}
 		</main>

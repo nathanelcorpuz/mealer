@@ -17,9 +17,10 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={inter.className}>
-				<div className="flex gap-[50px]">
+				<div className="flex gap-[50px] p-4 bg-gray-400">
 					<Link href="/">Home</Link>
-					<Link href="profile">Profile</Link>
+					<Link href="/auth/register">register</Link>
+					<Link href="profile">profile</Link>
 				</div>
 				{children}
 			</body>

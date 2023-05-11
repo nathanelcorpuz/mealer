@@ -4,9 +4,9 @@ import tokenVerifier from "@/lib/tokenVerifier";
 
 export async function GET(request: NextRequest) {
 	try {
-		const user = await tokenVerifier();
+		const { username, recipes } = await tokenVerifier();
 
-		return NextResponse.json({ user });
+		return NextResponse.json({ username, recipes });
 	} catch (error) {
 		return routeHandlerError(error as Error);
 	}

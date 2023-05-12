@@ -32,6 +32,19 @@ export default function EditDirection({
 				}
 				disabled={isLoading}
 			/>
+			<button
+				type="button"
+				className="px-2 py-1 bg-gray-950 text-white"
+				onClick={() =>
+					setNewDirections((prev) => {
+						const prevCopy = [...prev];
+						prevCopy.splice(index, 1);
+						return prevCopy;
+					})
+				}
+			>
+				Delete
+			</button>
 		</div>
 	);
 }

@@ -53,6 +53,18 @@ export default function EditIngredient({
 					disabled={isLoading}
 				/>
 			</div>
+			<button
+				className="px-2 py-1 bg-gray-950 text-white"
+				onClick={() =>
+					setNewIngredients((prev) => {
+						const prevCopy: Ingredient[] = JSON.parse(JSON.stringify(prev));
+						prevCopy.splice(index, 1);
+						return prevCopy;
+					})
+				}
+			>
+				Delete
+			</button>
 		</div>
 	);
 }

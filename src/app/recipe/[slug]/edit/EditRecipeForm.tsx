@@ -67,7 +67,7 @@ export default function EditRecipeForm({ recipe }: { recipe: Recipe }) {
 
 			<div className="p-4 border-2 border-gray-950 flex flex-col gap-[15px] items-start">
 				<p>Ingredients</p>
-				{recipe.ingredients.map((ingredient, index) => (
+				{newIngredients.map((ingredient, index) => (
 					<EditIngredient
 						key={ingredient._id}
 						index={index}
@@ -76,19 +76,43 @@ export default function EditRecipeForm({ recipe }: { recipe: Recipe }) {
 						isLoading={mutation.isLoading}
 					/>
 				))}
+				<button
+					type="button"
+					className="px-2 py-1 bg-gray-950 text-white"
+					onClick={() =>
+						setNewIngredients((prev) => [
+							...JSON.parse(JSON.stringify(prev)),
+							{
+								ingredient: "Enter new ingredient",
+								quantity: "Enter new quantity",
+							},
+						])
+					}
+				>
+					Add
+				</button>
 			</div>
 
 			<div className="p-4 border-2 border-gray-950 flex flex-col gap-[15px] items-start">
 				<p>Directions</p>
-				{recipe.directions.map((direction, index) => (
-					<EditDirection
-						key={index + direction}
+				{newDirections.map((_, index) => (
+					<EditDirection // relies on the index to make updates
+						key={index}
 						index={index}
 						newDirections={newDirections}
 						setNewDirections={setNewDirections}
 						isLoading={mutation.isLoading}
 					/>
 				))}
+				<button
+					type="button"
+					className="px-3 py-1 bg-gray-950 text-white"
+					onClick={() =>
+						setNewDirections((prev) => [...prev, "Enter new direction"])
+					}
+				>
+					New direction
+				</button>
 			</div>
 			<button>Submit</button>
 		</form>

@@ -17,7 +17,9 @@ export default async function tokenVerifier() {
 
 	await connectMongo();
 
-	const userDoc: UserDocument | null = await User.findById(user.userId);
+	const userDoc: UserDocument | null = await User.findById(user.userId, {
+		password: 0,
+	});
 
 	console.log("resource protected!");
 

@@ -7,7 +7,10 @@ export async function GET(request: NextRequest) {
 	try {
 		const user = await tokenVerifier();
 
-		const recipes = await Recipe.find({ userId: user?._id });
+		const recipes = await Recipe.find(
+			{ userId: user?._id },
+			{ name: 1, slug: 1, description: 1 }
+		);
 
 		const data = {
 			username: user?.username,

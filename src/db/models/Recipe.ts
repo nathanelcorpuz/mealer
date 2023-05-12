@@ -2,10 +2,6 @@ import mongoose from "mongoose";
 
 const { Schema, model, models } = mongoose;
 
-const directionSchema = new Schema({
-	description: { type: String, required: true },
-});
-
 const ingredientSchema = new Schema({
 	ingredient: { type: String, required: true },
 	quantity: { type: String, required: true },
@@ -16,7 +12,7 @@ const recipeSchema = new Schema({
 	name: { type: String, required: true },
 	description: { type: String, required: true },
 	ingredients: [ingredientSchema],
-	directions: [directionSchema],
+	directions: [{ type: String, default: "" }],
 	isDeleted: { type: Boolean, default: false },
 	dateCreated: { type: Date, default: Date.now },
 });

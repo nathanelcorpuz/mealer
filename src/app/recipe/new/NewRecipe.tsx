@@ -3,6 +3,7 @@
 import useMutation from "@/hooks/useMutation";
 import { useState } from "react";
 import { recipeMutator as mutator } from "@/lib/mutators";
+import slugify from "slugify";
 
 export default function NewRecipePage() {
 	const [name, setName] = useState("");
@@ -25,7 +26,13 @@ export default function NewRecipePage() {
 
 	const onSubmit = (e: any) => {
 		e.preventDefault();
-		mutation.mutate({ name, description, directions, ingredients });
+		mutation.mutate({
+			name,
+			description,
+			directions,
+			ingredients,
+			slug: slugify(name),
+		});
 	};
 
 	console.log(mutation);

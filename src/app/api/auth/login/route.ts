@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
 			}
 		);
 
-		return new NextResponse("Login success", {
+		return new NextResponse(JSON.stringify("Login success"), {
 			status: 200,
 			headers: {
 				"Set-Cookie": `token=${accessToken}; max-age=604800; httpOnly=true; path=/;`,

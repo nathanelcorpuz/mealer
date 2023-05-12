@@ -1,23 +1,32 @@
-import Recipe from "@/db/models/Recipe";
+import Recipe, { RecipeDocument } from "@/db/models/Recipe";
 import { routeHandlerError } from "@/lib/routeHandlerError";
 import tokenVerifier from "@/lib/tokenVerifier";
-import { NewRecipe } from "@/lib/types";
+import { Recipe as NewRecipe } from "@/lib/types";
+import { HydratedDocument } from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
 	try {
-		const { _id: userId } = await tokenVerifier();
+		const user = await tokenVerifier();
 
 		const newRecipe: NewRecipe = await request.json();
 
-		const newRecipeDoc = await Recipe.create({
-			userId,
+		const newRecipeDoc: HydratedDocument<RecipeDocument> = await Recipe.create({
+			userId: user?._id,
 			...newRecipe,
 		});
 
-		console.log(newRecipeDoc);
+		await user?.updateOne({ $push: { recipes: newRecipeDoc._id } });
 
 		return NextResponse.json({ newRecipeDoc });
+	} catch (error) {
+		return routeHandlerError(error as Error);
+	}
+}
+
+export async function GET(request: NextRequest) {
+	try {
+		return NextResponse.json({ hello: "world" });
 	} catch (error) {
 		return routeHandlerError(error as Error);
 	}

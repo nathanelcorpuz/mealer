@@ -12,8 +12,8 @@ export interface RecipeModel {
 	slug: string;
 	name: string;
 	description: string;
-	ingredients: [Ingredient];
-	directions?: [string];
+	ingredients: Ingredient[];
+	directions?: string[];
 	isDeleted: boolean;
 	dateCreated: Date;
 }

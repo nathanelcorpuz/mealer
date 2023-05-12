@@ -29,9 +29,25 @@ export async function GET(request: NextRequest) {
 		const { searchParams } = new URL(request.url);
 		const slug = searchParams.get("slug");
 
-		const recipeDoc = await Recipe.findOne({ slug });
+		const recipeDoc = await Recipe.findOne({ slug }, { userId: 0 });
 
 		return NextResponse.json(recipeDoc);
+	} catch (error) {
+		return routeHandlerError(error as Error);
+	}
+}
+
+export async function PUT(request: NextRequest) {
+	try {
+		const newRecipe: NewRecipe = await request.json();
+
+		const updatedRecipeDoc = await Recipe.findByIdAndUpdate(
+			newRecipe._id,
+			newRecipe,
+			{ returnDocument: "after" }
+		);
+
+		return NextResponse.json(updatedRecipeDoc);
 	} catch (error) {
 		return routeHandlerError(error as Error);
 	}

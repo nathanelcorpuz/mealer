@@ -2,6 +2,7 @@
 
 import useQuery from "@/hooks/useQuery";
 import { Query, Recipe } from "@/lib/types";
+import Link from "next/link";
 
 export default function RecipeDetails({ slug }: { slug: string }) {
 	const recipeQuery: Query = useQuery(
@@ -18,7 +19,7 @@ export default function RecipeDetails({ slug }: { slug: string }) {
 		<main>
 			{recipeQuery.isLoading && <p>Loading your recipe...</p>}
 			{recipeQuery.isSuccess && recipeData !== undefined && (
-				<div>
+				<div className="flex flex-col gap-[30px] items-start">
 					<p>{recipeData.name}</p>
 					<p>{recipeData.description}</p>
 					<div className="flex flex-col gap-[10px]">
@@ -36,6 +37,12 @@ export default function RecipeDetails({ slug }: { slug: string }) {
 							<p key={direction}>{direction}</p>
 						))}
 					</div>
+					<Link
+						className="py-[8px] px-[20px] bg-gray-950 text-white"
+						href={`/recipe/${slug}/edit`}
+					>
+						Edit
+					</Link>
 				</div>
 			)}
 		</main>

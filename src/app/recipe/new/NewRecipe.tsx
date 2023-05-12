@@ -2,15 +2,15 @@
 
 import useMutation from "@/hooks/useMutation";
 import { useState } from "react";
-import { recipeMutator as mutator } from "@/lib/mutators";
+import { newRecipeMutator as mutator } from "@/lib/mutators";
 import slugify from "slugify";
 
 export default function NewRecipePage() {
 	const [name, setName] = useState("");
 	const [description, setDescription] = useState("");
 	const [directions, setDirections] = useState([
-		"1. sample direction 1",
-		"2. sample direction 2",
+		"sample direction 1",
+		"sample direction 2",
 	]);
 	const [ingredients, setIngredients] = useState([
 		{
@@ -34,8 +34,6 @@ export default function NewRecipePage() {
 			slug: slugify(name),
 		});
 	};
-
-	console.log(mutation);
 
 	return (
 		<main>

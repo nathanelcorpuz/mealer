@@ -12,7 +12,7 @@ export default function useQuery(url: string) {
 	const runQuery = async () => {
 		setIsLoading(true);
 		try {
-			const response = await fetch(url);
+			const response = await fetch(url, { method: "GET" });
 			if (!response.ok) throw new Error(response.statusText);
 			const body = await response.text();
 			setData(JSON.parse(body));

@@ -7,6 +7,15 @@ const post = (url: string, payload: any) =>
 		},
 	});
 
-const fetcher = { post };
+const put = (url: string, payload: any) =>
+	fetch(url, {
+		method: "PUT",
+		body: JSON.stringify(payload),
+		headers: {
+			"Content-Type": "application/json",
+		},
+	});
+
+const fetcher = { post, put };
 
 export default fetcher;

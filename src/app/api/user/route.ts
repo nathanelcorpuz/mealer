@@ -22,3 +22,5 @@ export async function GET(request: NextRequest) {
 		return routeHandlerError(error as Error);
 	}
 }
+
+export const dynamic = "force-dynamic";

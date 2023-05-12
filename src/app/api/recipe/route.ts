@@ -52,3 +52,11 @@ export async function PUT(request: NextRequest) {
 		return routeHandlerError(error as Error);
 	}
 }
+
+export async function DELETE(request: NextRequest) {
+	try {
+		// wip
+	} catch (error) {
+		return routeHandlerError(error as Error);
+	}
+}

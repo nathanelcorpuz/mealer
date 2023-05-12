@@ -5,7 +5,6 @@ import connectMongo from "@/db/connectMongo";
 
 export default async function tokenVerifier() {
 	const cookies = getCookies();
-
 	const tokenCookie = cookies.get("token");
 
 	const user: any = jwt.verify(

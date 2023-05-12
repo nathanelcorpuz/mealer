@@ -26,7 +26,12 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
 	try {
-		return NextResponse.json({ hello: "world" });
+		const { searchParams } = new URL(request.url);
+		const slug = searchParams.get("slug");
+
+		const recipeDoc = await Recipe.findOne({ slug });
+
+		return NextResponse.json(recipeDoc);
 	} catch (error) {
 		return routeHandlerError(error as Error);
 	}

@@ -8,11 +8,6 @@ import { useContext } from "react";
 export default function Recipe() {
 	const user: Query = useContext(UserContext);
 
-	console.log("\n\n");
-	console.log("user");
-	console.log(user);
-	console.log("\n\n");
-
 	let userData: UserData | undefined;
 
 	if (user.isSuccess) {

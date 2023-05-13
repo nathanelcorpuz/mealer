@@ -16,6 +16,14 @@ const put = (url: string, payload: any) =>
 		},
 	});
 
-const fetcher = { post, put };
+const del = (url: string) =>
+	fetch(url, {
+		method: "DELETE",
+		headers: {
+			"Content-Type": "application/json",
+		},
+	});
+
+const fetcher = { post, put, del };
 
 export default fetcher;

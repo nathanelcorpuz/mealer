@@ -43,6 +43,12 @@ export default function RecipeDetails({ slug }: { slug: string }) {
 					>
 						Edit
 					</Link>
+					<Link
+						className="py-[8px] px-[20px] bg-gray-950 text-white"
+						href={`/recipe/${slug}/delete`}
+					>
+						Delete
+					</Link>
 				</div>
 			)}
 		</main>

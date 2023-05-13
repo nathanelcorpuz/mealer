@@ -1,5 +1,5 @@
 import fetcher from "./fetcher";
-import { Credentials, Recipe } from "./types";
+import { Credentials, Recipe, RecipeId } from "./types";
 
 export const registerMutator = (payload: Credentials) =>
 	fetcher.post("http://localhost:3000/api/auth/register", payload);
@@ -12,3 +12,6 @@ export const newRecipeMutator = (payload: Recipe) =>
 
 export const editRecipeMutator = (payload: Recipe) =>
 	fetcher.put("http://localhost:3000/api/recipe", payload);
+
+export const deleteRecipeMutator = (payload: RecipeId) =>
+	fetcher.del("http://localhost:3000/api/recipe?_id=" + payload._id);

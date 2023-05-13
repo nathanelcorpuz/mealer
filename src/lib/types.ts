@@ -23,6 +23,10 @@ export interface Recipe {
 	ingredients: Ingredient[];
 }
 
+export interface RecipeId {
+	_id: string;
+}
+
 export interface Query {
 	isSuccess: boolean;
 	isLoading: boolean;

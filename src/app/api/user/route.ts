@@ -8,7 +8,7 @@ export async function GET(request: NextRequest) {
 		const user = await tokenVerifier();
 
 		const recipes = await Recipe.find(
-			{ userId: user?._id },
+			{ userId: user?._id, isDeleted: false },
 			{ name: 1, slug: 1, description: 1 }
 		);
 

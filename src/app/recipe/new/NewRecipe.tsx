@@ -57,6 +57,7 @@ export default function NewRecipePage() {
 				</div>
 				<button>Create New Recipe</button>
 			</form>
+			{mutation.isError && <p>{mutation.error}</p>}
 		</main>
 	);
 }

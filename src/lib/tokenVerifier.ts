@@ -7,6 +7,8 @@ export default async function tokenVerifier() {
 	const cookies = getCookies();
 	const tokenCookie = cookies.get("token");
 
+	if (!tokenCookie) throw new Error("Unauthorized");
+
 	const user: any = jwt.verify(
 		tokenCookie?.value as string,
 		process.env.ACCESS_TOKEN_SECRET as string

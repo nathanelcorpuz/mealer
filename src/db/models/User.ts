@@ -5,7 +5,8 @@ const { Schema, model, models } = mongoose;
 export interface UserModel {
 	username: string;
 	password: string;
-	recipes: Types.ObjectId;
+	recipeIds: Types.ObjectId;
+	mealIds: Types.ObjectId;
 	isDeleted: boolean;
 	dateCreated: Date;
 }
@@ -13,7 +14,8 @@ export interface UserModel {
 const userSchema = new Schema<UserModel>({
 	username: { type: String, required: true, unique: true },
 	password: { type: String, required: true },
-	recipes: [{ type: Types.ObjectId, required: true }],
+	recipeIds: [{ type: Types.ObjectId, required: true, ref: "Recipe" }],
+	mealIds: [{ type: Types.ObjectId, required: true, ref: "Meal" }],
 	isDeleted: { type: Boolean, default: false },
 	dateCreated: { type: Date, default: Date.now },
 });

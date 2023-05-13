@@ -2,6 +2,7 @@ import { cookies as getCookies } from "next/headers";
 import jwt from "jsonwebtoken";
 import User, { UserDocument } from "@/db/models/User";
 import connectMongo from "@/db/connectMongo";
+import { HydratedDocument } from "mongoose";
 
 export default async function tokenVerifier() {
 	const cookies = getCookies();
@@ -9,18 +10,21 @@ export default async function tokenVerifier() {
 
 	if (!tokenCookie) throw new Error("Unauthorized");
 
-	const user: any = jwt.verify(
+	const verifiedToken: any = jwt.verify(
 		tokenCookie?.value as string,
 		process.env.ACCESS_TOKEN_SECRET as string
 	);
 
-	if (!user) throw new Error("Invalid token");
+	if (!verifiedToken) throw new Error("Invalid token");
 
 	await connectMongo();
 
-	const userDoc: UserDocument | null = await User.findById(user.userId, {
-		password: 0,
-	});
+	const userDoc: HydratedDocument<UserDocument> | null = await User.findById(
+		verifiedToken.userId,
+		{
+			password: 0,
+		}
+	);
 
 	console.log("resource protected!");
 

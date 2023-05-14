@@ -1,17 +1,23 @@
 "use client";
 
-import useMutation from "@/hooks/useMutation";
-import { useState } from "react";
-import { newRecipeMutator as mutator } from "@/lib/mutators";
 import slugify from "slugify";
+import { useMutation } from "@tanstack/react-query";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { newRecipeMutator as mutationFn } from "@/lib/mutators";
 
 export default function NewRecipePage() {
+	const router = useRouter();
+
 	const [name, setName] = useState("");
+
 	const [description, setDescription] = useState("");
+
 	const [directions, setDirections] = useState([
 		"sample direction 1",
 		"sample direction 2",
 	]);
+
 	const [ingredients, setIngredients] = useState([
 		{
 			ingredient: "Sample ingredient 1",
@@ -22,7 +28,12 @@ export default function NewRecipePage() {
 			quantity: "2 lbs",
 		},
 	]);
-	const mutation = useMutation({ mutator });
+
+	const mutation = useMutation({ mutationFn });
+
+	if (mutation.isSuccess) {
+		router.push("/recipe");
+	}
 
 	const onSubmit = (e: any) => {
 		e.preventDefault();
@@ -57,7 +68,7 @@ export default function NewRecipePage() {
 				</div>
 				<button>Create New Recipe</button>
 			</form>
-			{mutation.isError && <p>{mutation.error}</p>}
+			{mutation.isError && <p>{(mutation.error as Error).message}</p>}
 		</main>
 	);
 }

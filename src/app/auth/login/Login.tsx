@@ -1,13 +1,13 @@
 "use client";
 
-import useMutation from "@/hooks/useMutation";
-import { loginMutator as mutator } from "@/lib/mutators";
+import { useMutation } from "@tanstack/react-query";
+import { loginMutator as mutationFn } from "@/lib/mutators";
 import { useState } from "react";
 
 export default function Login() {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
-	const mutation = useMutation({ mutator });
+	const mutation = useMutation({ mutationFn });
 
 	if (mutation.isLoading) return <p>Logging you in</p>;
 

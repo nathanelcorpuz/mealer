@@ -9,13 +9,13 @@ export interface UserData {
 }
 
 export interface Ingredient {
-	_id: string;
+	_id: string | undefined;
 	ingredient: string;
 	quantity: string;
 }
 
 export interface Recipe {
-	_id: string;
+	_id: string | undefined;
 	name: string;
 	slug: string;
 	description: string;
@@ -23,14 +23,19 @@ export interface Recipe {
 	ingredients: Ingredient[];
 }
 
-export interface RecipeId {
-	_id: string;
+export interface NewIngredient {
+	ingredient: string;
+	quantity: string;
 }
 
-export interface Query {
-	isSuccess: boolean;
-	isLoading: boolean;
-	isError: boolean;
-	error: string;
-	data: any;
+export interface NewRecipe {
+	name: string;
+	slug: string;
+	description: string;
+	directions: string[];
+	ingredients: NewIngredient[];
+}
+
+export interface RecipeId {
+	_id: string;
 }

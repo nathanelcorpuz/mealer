@@ -1,18 +1,16 @@
 "use client";
 
-import useMutation from "@/hooks/useMutation";
-import useQuery from "@/hooks/useQuery";
-import { Query, Recipe } from "@/lib/types";
+import { useMutation } from "@tanstack/react-query";
+import { Recipe } from "@/lib/types";
 import Link from "next/link";
-import { deleteRecipeMutator as mutator } from "@/lib/mutators";
+import { deleteRecipeMutator as mutationFn } from "@/lib/mutators";
 import { useRouter } from "next/navigation";
+import useRecipeQuery from "@/hooks/queries/useRecipeQuery";
 
 export default function DeleteRecipe({ slug }: { slug: string }) {
-	const recipeQuery: Query = useQuery(
-		"http://localhost:3000/api/recipe?slug=" + slug
-	);
+	const recipeQuery = useRecipeQuery({ slug });
 
-	const mutation = useMutation({ mutator });
+	const mutation = useMutation({ mutationFn });
 
 	const router = useRouter();
 
@@ -24,7 +22,7 @@ export default function DeleteRecipe({ slug }: { slug: string }) {
 
 	const onSubmit = (e: any) => {
 		e.preventDefault();
-		mutation.mutate({ _id: recipeData?._id });
+		if (recipeData?._id) mutation.mutate({ _id: recipeData._id });
 	};
 
 	return (

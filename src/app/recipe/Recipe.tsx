@@ -1,17 +1,16 @@
 "use client";
 
-import { Query, UserData } from "@/lib/types";
-import { UserContext } from "@/providers/UserProvider";
+import { UserData } from "@/lib/types";
 import Link from "next/link";
-import { useContext } from "react";
+import useUser from "@/hooks/queries/useUser";
 
 export default function Recipe() {
-	const user: Query = useContext(UserContext);
+	const user = useUser();
 
 	let userData: UserData | undefined;
 
 	if (user.isSuccess) {
-		userData = user?.data;
+		userData = user.data;
 	}
 
 	return (

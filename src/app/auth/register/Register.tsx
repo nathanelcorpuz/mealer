@@ -1,14 +1,14 @@
 "use client";
 
-import useMutation from "@/hooks/useMutation";
+import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
-import { registerMutator as mutator } from "@/lib/mutators";
 import { Credentials } from "@/lib/types";
+import { registerMutator as mutationFn } from "@/lib/mutators";
 
 export default function Register() {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
-	const mutation = useMutation({ mutator });
+	const mutation = useMutation({ mutationFn });
 
 	const credentials: Credentials = { username, password };
 

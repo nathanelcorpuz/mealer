@@ -7,6 +7,14 @@ const post = (url: string, payload: any) =>
 		},
 	});
 
+const get = (url: string) =>
+	fetch(url, {
+		method: "GET",
+		headers: {
+			"Content-Type": "application/json",
+		},
+	});
+
 const put = (url: string, payload: any) =>
 	fetch(url, {
 		method: "PUT",
@@ -24,6 +32,6 @@ const del = (url: string) =>
 		},
 	});
 
-const fetcher = { post, put, del };
+const fetcher = { post, get, put, del };
 
 export default fetcher;

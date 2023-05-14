@@ -5,8 +5,8 @@ import { Ingredient, Recipe } from "@/lib/types";
 import EditDirection from "./EditDirection";
 import EditIngredient from "./EditIngredient";
 import { useState } from "react";
-import useMutation from "@/hooks/useMutation";
-import { editRecipeMutator as mutator } from "@/lib/mutators";
+import { useMutation } from "@tanstack/react-query";
+import { editRecipeMutator as mutationFn } from "@/lib/mutators";
 import { useRouter } from "next/navigation";
 
 export default function EditRecipeForm({ recipe }: { recipe: Recipe }) {
@@ -22,7 +22,7 @@ export default function EditRecipeForm({ recipe }: { recipe: Recipe }) {
 		recipe.ingredients
 	);
 
-	const mutation = useMutation({ mutator });
+	const mutation = useMutation({ mutationFn });
 
 	if (mutation.isSuccess) {
 		router.replace(`/recipe/${slugify(newName)}`);

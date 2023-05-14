@@ -1,13 +1,10 @@
 "use client";
 
-import { Query } from "@/lib/types";
-import useQuery from "@/hooks/useQuery";
 import EditRecipeForm from "./EditRecipeForm";
+import useRecipeQuery from "@/hooks/queries/useRecipeQuery";
 
 export default function EditRecipe({ slug }: { slug: string }) {
-	const recipeQuery: Query = useQuery(
-		"http://localhost:3000/api/recipe?slug=" + slug
-	);
+	const recipeQuery = useRecipeQuery({ slug });
 
 	return (
 		<main>

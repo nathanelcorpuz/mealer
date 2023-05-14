@@ -25,6 +25,7 @@ export interface MealModel {
 	timeOfDay: TimeOfDay;
 	dayOfWeek: DayOfWeek;
 	notes: string;
+	isDeleted: boolean;
 }
 
 const daysOfWeek = [
@@ -52,6 +53,7 @@ const mealSchema = new Schema<MealModel>({
 	timeOfDay: { type: String, enum: timesOfDay, required: true },
 	dayOfWeek: { type: String, enum: daysOfWeek, required: true },
 	notes: { type: String, required: true },
+	isDeleted: { type: Boolean, default: false },
 });
 
 export interface MealDocument extends mongoose.Document, MealModel {}

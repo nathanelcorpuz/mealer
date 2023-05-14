@@ -1,7 +1,7 @@
 import fetcher from "./fetcher";
 import { Credentials, NewRecipe, Recipe, RecipeId } from "./types";
 
-export const registerMutator = (payload: Credentials) =>
+export const registerMutator = async (payload: Credentials) =>
 	fetcher.post("http://localhost:3000/api/auth/register", payload);
 
 export const loginMutator = (payload: Credentials) =>

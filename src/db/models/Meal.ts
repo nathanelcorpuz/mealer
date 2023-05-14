@@ -2,6 +2,14 @@ import mongoose, { Types } from "mongoose";
 
 const { Schema, model, models } = mongoose;
 
+type TimeOfDay =
+	| "breakfast"
+	| "brunch"
+	| "lunch"
+	| "afternoon-snack"
+	| "dinner"
+	| "midnight-snack";
+
 type DayOfWeek =
 	| "sunday"
 	| "monday"
@@ -14,7 +22,7 @@ type DayOfWeek =
 export interface MealModel {
 	userId: Types.ObjectId;
 	recipeId: Types.ObjectId;
-	time: string;
+	timeOfDay: TimeOfDay;
 	dayOfWeek: DayOfWeek;
 	notes: string;
 }
@@ -29,10 +37,19 @@ const daysOfWeek = [
 	"saturday",
 ];
 
+const timesOfDay = [
+	"breakfast",
+	"brunch",
+	"lunch",
+	"afternoon-snack",
+	"dinner",
+	"midnight-snack",
+];
+
 const mealSchema = new Schema<MealModel>({
 	userId: { type: Schema.Types.ObjectId, required: true, ref: "User" },
 	recipeId: { type: Schema.Types.ObjectId, required: true, ref: "Recipe" },
-	time: { type: String, required: true },
+	timeOfDay: { type: String, enum: timesOfDay, required: true },
 	dayOfWeek: { type: String, enum: daysOfWeek, required: true },
 	notes: { type: String, required: true },
 });

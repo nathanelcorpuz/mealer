@@ -1,3 +1,6 @@
+import { DayOfWeek, TimeOfDay } from "@/db/models/Meal";
+import { Types } from "mongoose";
+
 export interface Credentials {
 	username: string;
 	password: string;
@@ -38,4 +41,11 @@ export interface NewRecipe {
 
 export interface RecipeId {
 	_id: string;
+}
+
+export interface NewMeal {
+	recipeId: Types.ObjectId;
+	timeOfDay: TimeOfDay;
+	dayOfWeek: DayOfWeek;
+	notes: string;
 }

@@ -2,7 +2,7 @@ import mongoose, { Types } from "mongoose";
 
 const { Schema, model, models } = mongoose;
 
-type TimeOfDay =
+export type TimeOfDay =
 	| "breakfast"
 	| "brunch"
 	| "lunch"
@@ -10,7 +10,7 @@ type TimeOfDay =
 	| "dinner"
 	| "midnight-snack";
 
-type DayOfWeek =
+export type DayOfWeek =
 	| "sunday"
 	| "monday"
 	| "tuesday"

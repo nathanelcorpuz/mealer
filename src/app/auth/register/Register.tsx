@@ -10,8 +10,6 @@ export default function Register() {
 	const [password, setPassword] = useState("");
 	const mutation = useMutation({ mutationFn });
 
-	console.log(mutation);
-
 	const credentials: Credentials = { username, password };
 
 	if (mutation.isLoading) return <p>Loading</p>;

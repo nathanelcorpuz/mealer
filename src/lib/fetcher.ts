@@ -1,4 +1,4 @@
-const handleResponse = (response: Response) => {
+const handleResponse = async (response: Response) => {
 	if (!response.ok) throw new Error(response.statusText);
 	return response.json();
 };
@@ -12,14 +12,13 @@ const post = (url: string, payload: any) =>
 		},
 	}).then(handleResponse);
 
-const get = (url: string) => {
+const get = (url: string) =>
 	fetch(url, {
 		method: "GET",
 		headers: {
 			"Content-Type": "application/json",
 		},
 	}).then(handleResponse);
-};
 
 const put = (url: string, payload: any) =>
 	fetch(url, {

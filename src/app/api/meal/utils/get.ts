@@ -1,20 +1,24 @@
+import Meal from "@/db/models/Meal";
+import { routeHandlerError } from "@/lib/routeHandlerError";
 import tokenVerifier from "@/lib/tokenVerifier";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export default async function post(request: NextRequest) {
+export default async function get(request: NextRequest) {
 	try {
 		const user = await tokenVerifier();
-
 		if (!user) throw new Error("Account error");
 
-		const newMeal: NewMeal = await request.json();
+		const { searchParams } = new URL(request.url);
+		const _id = searchParams.get("_id");
 
-		const newMealDoc: HydratedDocument<MealDocument> = await Meal.create({
-			userId: user._id,
-			...newMeal,
-		});
+		const mealDoc = await Meal.findById(_id, { userId: 0 })
+			.populate({
+				path: "recipeId",
+				select: "-userId -isDeleted -dateCreated",
+			})
+			.exec();
 
-		await user.updateOne({ $push: { recipeIds: newMealDoc._id } });
+		return NextResponse.json(mealDoc);
 	} catch (error) {
 		return routeHandlerError(error as Error);
 	}

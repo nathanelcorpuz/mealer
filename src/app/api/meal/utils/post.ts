@@ -8,7 +8,6 @@ import { NextRequest, NextResponse } from "next/server";
 export default async function post(request: NextRequest) {
 	try {
 		const user = await tokenVerifier();
-
 		if (!user) throw new Error("Account error");
 
 		const newMeal: NewMeal = await request.json();

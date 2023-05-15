@@ -4,7 +4,7 @@ import { UserData } from "@/lib/types";
 import Link from "next/link";
 import useUserQuery from "@/hooks/queries/useUserQuery";
 
-export default function Recipe() {
+export default function recipes() {
 	const userQuery = useUserQuery();
 
 	let userData: UserData | undefined;

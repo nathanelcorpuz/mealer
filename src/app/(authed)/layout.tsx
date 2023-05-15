@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import Header from "./Header";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
 	const cookieStore = cookies();
@@ -9,7 +10,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
 	return (
 		<main>
-			<h1>Authed layout</h1>
+			<Header />
 			{children}
 		</main>
 	);

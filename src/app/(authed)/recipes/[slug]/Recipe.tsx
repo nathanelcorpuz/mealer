@@ -4,7 +4,7 @@ import { Recipe } from "@/lib/types";
 import Link from "next/link";
 import useRecipeQuery from "@/hooks/queries/useRecipeQuery";
 
-export default function RecipeDetails({ slug }: { slug: string }) {
+export default function Recipe({ slug }: { slug: string }) {
 	const recipe = useRecipeQuery({ slug });
 
 	let recipeData: Recipe | undefined;

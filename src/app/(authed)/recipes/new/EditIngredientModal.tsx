@@ -1,78 +1,103 @@
 import Button from "@/components/Button";
 import Heading from "@/components/Heading";
 import Input from "@/components/Input";
-import { NewIngredient, NewRecipeAction } from "@/lib/types";
+import ModalButtonsWrapper from "@/components/ModalButtonsWrapper";
+import ModalWrapper from "@/components/ModalWrapper";
+import { NewRecipeAction, TargetIngredient } from "@/lib/types";
 import { Dispatch, SetStateAction, useState } from "react";
+import DeleteIngredientConfirmation from "./DeleteIngredientConfirmation";
 
 export default function EditIngredientModal({
-	ingredient,
+	targetIngredient,
 	dispatch,
 	setOpen,
 }: {
-	ingredient: NewIngredient;
+	targetIngredient: TargetIngredient;
 	dispatch: Dispatch<NewRecipeAction>;
 	setOpen: Dispatch<SetStateAction<boolean>>;
 }) {
 	const [ingredientValue, setIngredientValue] = useState<string>(
-		ingredient.ingredient
+		targetIngredient.ingredient
 	);
-	const [quantity, setQuantity] = useState<string>(ingredient.quantity);
+	const [quantity, setQuantity] = useState<string>(targetIngredient.quantity);
+	const [isDeleteConfirmationOpen, setIsDeleteConfirmationOpen] =
+		useState<boolean>(false);
 
-	const onSubmitEdit = () => {
+	const onEditSubmit = () => {
 		dispatch({
 			type: "edited_ingredient",
-			ingredientToEdit: ingredient,
+			targetIngredient,
 			newIngredient: { ingredient: ingredientValue, quantity },
 		});
 		setOpen(false);
 	};
+
+	const onDeleteClick = () => setIsDeleteConfirmationOpen(true);
+
+	const onDeleteConfirmationNo = () => setIsDeleteConfirmationOpen(false);
+
+	const onDeleteConfirmationYes = () => {
+		dispatch({
+			type: "deleted_ingredient",
+			targetIngredient,
+		});
+		setIsDeleteConfirmationOpen(false);
+		setOpen(false);
+	};
+
 	return (
-		<div
-			className="fixed top-0 right-0 bottom-0 left-0 
-		[background:rgb(0,0,0,0.5)] flex items-center justify-center p-4"
-		>
-			<div
-				className="w-[400px] bg-white 
-      text-gray-950 z-[99] rounded-md p-4 flex flex-col gap-[20px]"
-			>
-				<Heading variant="h2">Edit Ingredient</Heading>
-				<Input
-					labelText="Ingredient"
-					labelProps={{ htmlFor: "ingredient" }}
-					inputProps={{
-						type: "text",
-						id: "ingredient",
-						value: ingredientValue,
-						onChange: (e) => setIngredientValue(e.target.value),
+		<ModalWrapper>
+			<Heading variant="h2">Edit Ingredient</Heading>
+			<Input
+				labelText="Ingredient"
+				labelProps={{ htmlFor: "ingredient" }}
+				inputProps={{
+					type: "text",
+					id: "ingredient",
+					value: ingredientValue,
+					onChange: (e) => setIngredientValue(e.target.value),
+				}}
+			/>
+			<Input
+				labelText="Quantity"
+				labelProps={{ htmlFor: "quantity" }}
+				inputProps={{
+					type: "text",
+					id: "quantity",
+					value: quantity,
+					onChange: (e) => setQuantity(e.target.value),
+				}}
+			/>
+			<ModalButtonsWrapper>
+				<Button
+					variant="secondary"
+					props={{
+						onClick: () => setOpen(false),
+						type: "button",
 					}}
+				>
+					Cancel
+				</Button>
+				<Button
+					classOverrides="py-2 text-sm"
+					props={{ onClick: onEditSubmit, type: "button" }}
+				>
+					Submit
+				</Button>
+			</ModalButtonsWrapper>
+			{isDeleteConfirmationOpen ? (
+				<DeleteIngredientConfirmation
+					onNo={onDeleteConfirmationNo}
+					onYes={onDeleteConfirmationYes}
 				/>
-				<Input
-					labelText="Quantity"
-					labelProps={{ htmlFor: "quantity" }}
-					inputProps={{
-						type: "text",
-						id: "quantity",
-						value: quantity,
-						onChange: (e) => setQuantity(e.target.value),
-					}}
-				/>
-				<div className="flex justify-between items-center">
-					<button
-						className="text-sm hover:text-emerald-700 p-2 
-						hover:bg-gray-200 rounded-md"
-						onClick={() => setOpen(false)}
-						type="button"
-					>
-						Cancel
-					</button>
-					<Button
-						classOverrides="py-2 text-sm"
-						props={{ onClick: onSubmitEdit, type: "button" }}
-					>
-						Submit
-					</Button>
-				</div>
-			</div>
-		</div>
+			) : (
+				<Button
+					variant="secondary"
+					props={{ type: "button", onClick: onDeleteClick }}
+				>
+					Delete ingredient
+				</Button>
+			)}
+		</ModalWrapper>
 	);
 }

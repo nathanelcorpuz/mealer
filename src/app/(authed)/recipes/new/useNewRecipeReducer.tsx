@@ -42,17 +42,17 @@ const reducer: Reducer<NewRecipeState, NewRecipeAction> = (
 			ingredients: [...stateClone.ingredients, action.newIngredient],
 		};
 	}
-	if (action.type === "edited_ingredient" && action.ingredientToEdit) {
-		const { ingredientToEdit, newIngredient } = action;
+	if (action.type === "edited_ingredient" && action.targetIngredient) {
+		const { targetIngredient, newIngredient } = action;
 		const stateClone: NewRecipeState = jsonCopy(state);
 		const ingredientsCopy = [...stateClone.ingredients];
 		const updatedIngredients = ingredientsCopy.map(
 			({ quantity, ingredient }) => {
 				if (
-					ingredientToEdit &&
+					targetIngredient &&
 					newIngredient &&
-					quantity === ingredientToEdit.quantity &&
-					ingredient === ingredientToEdit.ingredient
+					quantity === targetIngredient.quantity &&
+					ingredient === targetIngredient.ingredient
 				) {
 					return newIngredient;
 				}
@@ -64,8 +64,20 @@ const reducer: Reducer<NewRecipeState, NewRecipeAction> = (
 			ingredients: updatedIngredients,
 		};
 	}
-	if (action.type === "deleted_ingredient") {
-		return state;
+	if (action.type === "deleted_ingredient" && action.targetIngredient) {
+		const { targetIngredient } = action;
+		const stateClone: NewRecipeState = jsonCopy(state);
+		const newIngredients = [...stateClone.ingredients];
+		const indexToDelete = newIngredients.findIndex(
+			({ quantity, ingredient }) =>
+				quantity === targetIngredient.quantity &&
+				ingredient === targetIngredient.ingredient
+		);
+		newIngredients.splice(indexToDelete, 1);
+		return {
+			...stateClone,
+			ingredients: newIngredients,
+		};
 	}
 	if (action.type === "added_direction") {
 		return state;

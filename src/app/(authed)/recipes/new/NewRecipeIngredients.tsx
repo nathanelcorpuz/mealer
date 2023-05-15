@@ -2,7 +2,7 @@
 
 import Button from "@/components/Button";
 import Heading from "@/components/Heading";
-import { IngredientToEdit, NewIngredient, NewRecipeAction } from "@/lib/types";
+import { TargetIngredient, NewIngredient, NewRecipeAction } from "@/lib/types";
 import NewIngredientModal from "./NewIngredientModal";
 import { Dispatch, useState } from "react";
 import EditIngredientModal from "./EditIngredientModal";
@@ -14,9 +14,9 @@ export default function NewRecipeIngredients({
 	ingredients: NewIngredient[];
 	dispatch: Dispatch<NewRecipeAction>;
 }) {
-	const [isNewModalOpen, setIsNewModalOpen] = useState(false);
-	const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-	const [ingredientToEdit, setIngredientToEdit] = useState<IngredientToEdit>({
+	const [isNewModalOpen, setIsNewModalOpen] = useState<boolean>(false);
+	const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
+	const [targetIngredient, setTargetIngredient] = useState<TargetIngredient>({
 		quantity: "",
 		ingredient: "",
 	});
@@ -35,7 +35,7 @@ export default function NewRecipeIngredients({
 							hover:bg-emerald-200
 							cursor-pointer"
 						onClick={() => {
-							setIngredientToEdit({ ingredient, quantity });
+							setTargetIngredient({ ingredient, quantity });
 							setIsEditModalOpen(true);
 						}}
 					>
@@ -55,7 +55,7 @@ export default function NewRecipeIngredients({
 			)}
 			{isEditModalOpen && (
 				<EditIngredientModal
-					ingredient={ingredientToEdit}
+					targetIngredient={targetIngredient}
 					dispatch={dispatch}
 					setOpen={setIsEditModalOpen}
 				/>

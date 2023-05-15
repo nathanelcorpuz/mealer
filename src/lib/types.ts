@@ -54,7 +54,7 @@ export type HeadingVariants = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
 export interface NewIngredient extends Omit<Ingredient, "_id"> {}
 
-export interface IngredientToEdit extends NewIngredient {}
+export interface TargetIngredient extends NewIngredient {}
 
 export interface NewRecipeState extends Omit<NewRecipe, "slug"> {}
 
@@ -68,9 +68,9 @@ export interface NewRecipeAction {
 		| "added_direction"
 		| "edited_direction"
 		| "deleted_direction";
-	directionToEdit?: string;
+	targetDirection?: string;
 	newDirection?: string;
-	ingredientToEdit?: IngredientToEdit;
+	targetIngredient?: TargetIngredient;
 	newIngredient?: NewIngredient;
 	newName?: string;
 	newDescription?: string;

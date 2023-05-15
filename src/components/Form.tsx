@@ -7,7 +7,7 @@ export default function Form({
 }: {
 	children: React.ReactNode;
 	classOverrides?: FormHTMLAttributes<HTMLFormElement>["className"];
-	props: FormHTMLAttributes<HTMLFormElement>;
+	props?: FormHTMLAttributes<HTMLFormElement>;
 }) {
 	return (
 		<form

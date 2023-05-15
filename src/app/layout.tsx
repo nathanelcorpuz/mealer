@@ -1,7 +1,7 @@
-import Header from "@/components/Header";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import Providers from "@/providers/Providers";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +19,10 @@ export default function RootLayout({
 		<html lang="en">
 			<body className={inter.className}>
 				<Providers>
-					<Header />
+					<h1>From root layout</h1>
+					<Link href="register">Register</Link>
+					<Link href="recipe">Recipe</Link>
+					<Link href="/">Home</Link>
 					{children}
 				</Providers>
 			</body>

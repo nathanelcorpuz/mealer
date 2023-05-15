@@ -2,15 +2,15 @@
 
 import { UserData } from "@/lib/types";
 import Link from "next/link";
-import useUser from "@/hooks/queries/useUser";
+import useUserQuery from "@/hooks/queries/useUserQuery";
 
 export default function Recipe() {
-	const user = useUser();
+	const userQuery = useUserQuery();
 
 	let userData: UserData | undefined;
 
-	if (user.isSuccess) {
-		userData = user.data;
+	if (userQuery.isSuccess) {
+		userData = userQuery.data;
 	}
 
 	return (
@@ -23,8 +23,8 @@ export default function Recipe() {
 			</Link>
 			<div className=" flex flex-col gap-[20px]">
 				<p className=" text-5xl">Recipes</p>
-				{user.isLoading && <p>Loading your recipes...</p>}
-				{user.isSuccess &&
+				{userQuery.isLoading && <p>Loading your recipes...</p>}
+				{userQuery.isSuccess &&
 					userData !== undefined &&
 					userData.recipes.map((recipe) => (
 						<Link key={recipe.name} href={`/recipe/${recipe.slug}`}>

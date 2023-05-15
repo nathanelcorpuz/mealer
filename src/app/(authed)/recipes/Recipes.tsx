@@ -1,37 +1,44 @@
 "use client";
 
-import { UserData } from "@/lib/types";
+import addNewIcon from "../../../../public/add-new-icon.png";
+import { Recipe } from "@/lib/types";
 import Link from "next/link";
 import useUserQuery from "@/hooks/queries/useUserQuery";
+import Heading from "@/components/Heading";
+import IconButton from "@/components/IconButton";
+import ClickableListItem from "@/components/ClickableListItem";
+import { useRouter } from "next/navigation";
 
-export default function recipes() {
+export default function Recipes() {
 	const userQuery = useUserQuery();
-
-	let userData: UserData | undefined;
-
-	if (userQuery.isSuccess) {
-		userData = userQuery.data;
-	}
+	const router = useRouter();
 
 	return (
-		<main className="flex flex-col">
-			<Link
-				href="/recipe/new"
-				className="px-[20px] py-[8px] bg-gray-950 text-white"
-			>
-				Create New Recipe
-			</Link>
-			<div className=" flex flex-col gap-[20px]">
-				<p className=" text-5xl">Recipes</p>
-				{userQuery.isLoading && <p>Loading your recipes...</p>}
-				{userQuery.isSuccess &&
-					userData !== undefined &&
-					userData.recipes.map((recipe) => (
-						<Link key={recipe.name} href={`/recipe/${recipe.slug}`}>
-							{recipe.name}
-						</Link>
-					))}
+		<section className="flex flex-col gap-[30px]">
+			<div className="flex gap-[20px] items-center">
+				<Heading>Recipes</Heading>
+				<IconButton
+					src={addNewIcon}
+					alt="add new icon"
+					props={{ onClick: () => router.push("/recipes/new") }}
+				/>
 			</div>
-		</main>
+			<div className="flex flex-col gap-[20px]">
+				{userQuery.isLoading && <p>Loading your recipes...</p>}
+				<ul className="flex flex-col list-none">
+					{userQuery.isSuccess &&
+						userQuery.data.recipes.map((recipe: Recipe) => (
+							<ClickableListItem key={recipe.name}>
+								<Link
+									href={`/recipes/${recipe.slug}`}
+									className="w-[100%] h-[100%] block"
+								>
+									{recipe.name}
+								</Link>
+							</ClickableListItem>
+						))}
+				</ul>
+			</div>
+		</section>
 	);
 }

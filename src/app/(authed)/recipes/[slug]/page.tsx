@@ -1,9 +1,9 @@
-import RecipeDetails from "./RecipeDetails";
+import Recipe from "./Recipe";
 
 export default function RecipeDetailsPage({
 	params,
 }: {
 	params: { slug: string };
 }) {
-	return <RecipeDetails slug={params.slug} />;
+	return <Recipe slug={params.slug} />;
 }

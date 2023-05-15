@@ -1,10 +1,10 @@
 import PageWrapper from "@/components/PageWrapper";
-import Recipe from "./Recipe";
+import Recipes from "./Recipes";
 
 export default function RecipePage() {
 	return (
 		<PageWrapper>
-			<Recipe />
+			<Recipes />
 		</PageWrapper>
 	);
 }

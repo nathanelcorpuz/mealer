@@ -11,31 +11,13 @@ import Button from "@/components/Button";
 import Form from "@/components/Form";
 import Heading from "@/components/Heading";
 import ErrorText from "@/components/ErrorText";
-import ClickableListItem from "@/components/ClickableListItem";
 import NewRecipeIngredients from "./NewRecipeIngredients";
+import useNewRecipeReducer from "./useNewRecipeReducer";
 
 export default function NewRecipePage() {
 	const router = useRouter();
 
-	const [name, setName] = useState("");
-
-	const [description, setDescription] = useState("");
-
-	const [directions, setDirections] = useState([
-		"Sample direction 1",
-		"Sample direction 2",
-	]);
-
-	const [ingredients, setIngredients] = useState([
-		{
-			ingredient: "Sample ingredient 1",
-			quantity: "5 pcs",
-		},
-		{
-			ingredient: "Sample ingredient 2",
-			quantity: "2 lbs",
-		},
-	]);
+	const [state, dispatch] = useNewRecipeReducer();
 
 	const mutation = useMutation({ mutationFn });
 
@@ -45,13 +27,7 @@ export default function NewRecipePage() {
 
 	const onSubmit = (e: any) => {
 		e.preventDefault();
-		mutation.mutate({
-			name,
-			description,
-			directions,
-			ingredients,
-			slug: slugify(name),
-		});
+		mutation.mutate({ ...state, slug: slugify(state.name) });
 	};
 
 	return (
@@ -63,7 +39,11 @@ export default function NewRecipePage() {
 				inputProps={{
 					id: "name",
 					type: "text",
-					onChange: (e) => setName(e.target.value),
+					onChange: (e) =>
+						dispatch({
+							type: "edited_name",
+							newName: e.target.value,
+						}),
 				}}
 			/>
 			<TextArea
@@ -71,10 +51,14 @@ export default function NewRecipePage() {
 				labelProps={{ htmlFor: "description" }}
 				textAreaProps={{
 					id: "description",
-					onChange: (e) => setDescription(e.target.value),
+					onChange: (e) =>
+						dispatch({
+							type: "edited_description",
+							newDescription: e.target.value,
+						}),
 				}}
 			/>
-			<NewRecipeIngredients ingredients={ingredients} />
+			<NewRecipeIngredients ingredients={state.ingredients} />
 
 			<Button props={{ type: "submit" }}>Create new recipe</Button>
 			{mutation.isError && (

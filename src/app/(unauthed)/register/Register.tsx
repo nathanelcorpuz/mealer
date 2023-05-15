@@ -4,10 +4,15 @@ import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { Credentials } from "@/lib/types";
 import { registerMutator as mutationFn } from "@/lib/mutators";
+import Form from "@/components/Form";
+import ErrorText from "@/components/ErrorText";
+import Input from "@/components/Input";
+import Button from "@/components/Button";
 
 export default function Register() {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
+
 	const mutation = useMutation({ mutationFn });
 
 	const credentials: Credentials = { username, password };
@@ -15,35 +20,36 @@ export default function Register() {
 	if (mutation.isLoading) return <p>Loading</p>;
 
 	return (
-		<main>
-			<form
-				className="flex flex-col gap-[20px] max-w-[800px]"
-				onSubmit={(e) => {
+		<Form
+			props={{
+				onSubmit: (e) => {
 					e.preventDefault();
 					mutation.mutate(credentials);
+				},
+			}}
+		>
+			<Input
+				labelText="Username"
+				labelProps={{ htmlFor: "username" }}
+				inputProps={{
+					type: "text",
+					id: "username",
+					onChange: (e) => setUsername(e.target.value),
 				}}
-			>
-				<div className="flex flex-col">
-					<label htmlFor="username">Username</label>
-					<input
-						className="border border-gray-600"
-						type="text"
-						id="username"
-						onChange={(e) => setUsername(e.target.value)}
-					/>
-				</div>
-				<div className="flex flex-col">
-					<label htmlFor="password">Password</label>
-					<input
-						className="border border-gray-600"
-						type="password"
-						id="password"
-						onChange={(e) => setPassword(e.target.value)}
-					/>
-				</div>
-				<button>Register</button>
-			</form>
-			{mutation.isError && <p>{(mutation.error as Error).message}</p>}
-		</main>
+			/>
+			<Input
+				labelText="Password"
+				labelProps={{ htmlFor: "password" }}
+				inputProps={{
+					type: "password",
+					id: "password",
+					onChange: (e) => setPassword(e.target.value),
+				}}
+			/>
+			<Button>Register</Button>
+			{mutation.isError && (
+				<ErrorText>{(mutation.error as Error).message}</ErrorText>
+			)}
+		</Form>
 	);
 }

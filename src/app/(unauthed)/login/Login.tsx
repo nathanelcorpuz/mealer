@@ -6,6 +6,7 @@ import { useState } from "react";
 import Form from "@/components/Form";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
+import ErrorText from "@/components/ErrorText";
 
 export default function Login() {
 	const [username, setUsername] = useState("");
@@ -15,38 +16,38 @@ export default function Login() {
 	if (mutation.isLoading) return <p>Logging you in</p>;
 
 	return (
-		<main>
-			<Form
-				props={{
-					onSubmit: (e: any) => {
-						e.preventDefault();
-						mutation.mutate({ username, password });
-					},
+		<Form
+			props={{
+				onSubmit: (e: any) => {
+					e.preventDefault();
+					mutation.mutate({ username, password });
+				},
+			}}
+		>
+			<Input
+				labelText="Username"
+				labelProps={{ htmlFor: "username" }}
+				inputProps={{
+					type: "text",
+					id: "username",
+					onChange: (e: any) => setUsername(e.target.value),
+					value: username,
 				}}
-			>
-				<Input
-					labelText="Username"
-					labelProps={{ htmlFor: "username" }}
-					inputProps={{
-						type: "text",
-						id: "username",
-						onChange: (e: any) => setUsername(e.target.value),
-						value: username,
-					}}
-				/>
-				<Input
-					labelText="Password"
-					labelProps={{ htmlFor: "password" }}
-					inputProps={{
-						type: "password",
-						id: "password",
-						onChange: (e: any) => setPassword(e.target.value),
-						value: password,
-					}}
-				/>
-				<Button>Login</Button>
-			</Form>
-			{mutation.isError && <p>{mutation.error as string}</p>}
-		</main>
+			/>
+			<Input
+				labelText="Password"
+				labelProps={{ htmlFor: "password" }}
+				inputProps={{
+					type: "password",
+					id: "password",
+					onChange: (e: any) => setPassword(e.target.value),
+					value: password,
+				}}
+			/>
+			<Button>Login</Button>
+			{mutation.isError && (
+				<ErrorText>{(mutation.error as Error).message}</ErrorText>
+			)}
+		</Form>
 	);
 }

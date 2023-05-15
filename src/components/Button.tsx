@@ -2,15 +2,15 @@ import { ButtonHTMLAttributes } from "react";
 
 export default function Button({
 	children,
-	buttonProps,
+	props,
 }: {
 	children: React.ReactNode;
-	buttonProps?: ButtonHTMLAttributes<HTMLButtonElement>;
+	props?: ButtonHTMLAttributes<HTMLButtonElement>;
 }) {
 	return (
 		<button
-			className="bg-emerald-700 text-white p-4 rounded-md text-lg font-black uppercase"
-			{...buttonProps}
+			className="bg-emerald-700 text-white p-4 rounded-md text-lg font-black uppercase hover:bg-emerald-800"
+			{...props}
 		>
 			{children}
 		</button>

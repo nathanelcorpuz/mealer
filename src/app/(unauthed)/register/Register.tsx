@@ -8,23 +8,32 @@ import Form from "@/components/Form";
 import ErrorText from "@/components/ErrorText";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
+import MutationText from "@/components/MutationText";
+import { useRouter } from "next/navigation";
 
 export default function Register() {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
+	const router = useRouter();
 
 	const mutation = useMutation({ mutationFn });
 
 	const credentials: Credentials = { username, password };
 
-	if (mutation.isLoading) return <p>Loading</p>;
+	if (mutation.isLoading)
+		return <MutationText>Creating your account...</MutationText>;
+
+	if (mutation.isSuccess) {
+		return <MutationText>Success! Redirecting to login page...</MutationText>;
+	}
 
 	return (
 		<Form
 			props={{
-				onSubmit: (e) => {
+				onSubmit: async (e) => {
 					e.preventDefault();
-					mutation.mutate(credentials);
+					const result = await mutation.mutateAsync(credentials);
+					if (result.isSuccess) router.push("/login");
 				},
 			}}
 		>

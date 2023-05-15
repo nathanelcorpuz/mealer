@@ -10,10 +10,7 @@ export async function POST(request: Request) {
 		const { username, password } = await request.json();
 		const hashedPassword = await bcrypt.hash(password, 10);
 		await User.create({ username, password: hashedPassword });
-		return NextResponse.json({
-			success: true,
-			message: "Registration success!",
-		});
+		return NextResponse.json({ isSuccess: true });
 	} catch (error) {
 		return routeHandlerError(error as Error);
 	}

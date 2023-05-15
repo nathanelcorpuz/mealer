@@ -7,20 +7,30 @@ import Form from "@/components/Form";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import ErrorText from "@/components/ErrorText";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
+
+	const router = useRouter();
+
 	const mutation = useMutation({ mutationFn });
 
-	if (mutation.isLoading) return <p>Logging you in</p>;
+	if (mutation.isLoading || mutation.isSuccess)
+		return <p className="text-center">Logging you in</p>;
+
+	if (mutation.isSuccess) {
+		return <p className="text-center">Login success! Redirecting...</p>;
+	}
 
 	return (
 		<Form
 			props={{
-				onSubmit: (e: any) => {
+				onSubmit: async (e: any) => {
 					e.preventDefault();
-					mutation.mutate({ username, password });
+					const result = await mutation.mutateAsync({ username, password });
+					if (result.isSuccess) router.push("/");
 				},
 			}}
 		>

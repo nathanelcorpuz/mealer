@@ -18,13 +18,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={inter.className}>
-				<Providers>
-					<h1>From root layout</h1>
-					<Link href="register">Register</Link>
-					<Link href="recipe">Recipe</Link>
-					<Link href="/">Home</Link>
-					{children}
-				</Providers>
+				<Providers>{children}</Providers>
 			</body>
 		</html>
 	);

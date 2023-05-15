@@ -1,7 +1,9 @@
+import Header from "./Header";
+
 export default function Layout({ children }: { children: React.ReactNode }) {
 	return (
 		<main>
-			<h1>Unauthed layout</h1>
+			<Header />
 			{children}
 		</main>
 	);

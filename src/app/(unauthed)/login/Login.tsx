@@ -3,6 +3,9 @@
 import { useMutation } from "@tanstack/react-query";
 import { loginMutator as mutationFn } from "@/lib/mutators";
 import { useState } from "react";
+import Form from "@/components/Form";
+import Input from "@/components/Input";
+import Button from "@/components/Button";
 
 export default function Login() {
 	const [username, setUsername] = useState("");
@@ -13,33 +16,36 @@ export default function Login() {
 
 	return (
 		<main>
-			<form
-				className="flex flex-col gap-[20px] max-w-[800px]"
-				onSubmit={(e) => {
-					e.preventDefault();
-					mutation.mutate({ username, password });
+			<Form
+				props={{
+					onSubmit: (e: any) => {
+						e.preventDefault();
+						mutation.mutate({ username, password });
+					},
 				}}
 			>
-				<div className="flex flex-col">
-					<label htmlFor="username">Username</label>
-					<input
-						className="border border-gray-600"
-						type="text"
-						id="username"
-						onChange={(e) => setUsername(e.target.value)}
-					/>
-				</div>
-				<div className="flex flex-col">
-					<label htmlFor="password">Password</label>
-					<input
-						className="border border-gray-600"
-						type="password"
-						id="password"
-						onChange={(e) => setPassword(e.target.value)}
-					/>
-				</div>
-				<button>Login</button>
-			</form>
+				<Input
+					labelText="Username"
+					labelProps={{ htmlFor: "username" }}
+					inputProps={{
+						type: "text",
+						id: "username",
+						onChange: (e: any) => setUsername(e.target.value),
+						value: username,
+					}}
+				/>
+				<Input
+					labelText="Password"
+					labelProps={{ htmlFor: "password" }}
+					inputProps={{
+						type: "password",
+						id: "password",
+						onChange: (e: any) => setPassword(e.target.value),
+						value: password,
+					}}
+				/>
+				<Button>Login</Button>
+			</Form>
 			{mutation.isError && <p>{mutation.error as string}</p>}
 		</main>
 	);

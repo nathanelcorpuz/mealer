@@ -2,22 +2,24 @@
 
 import Button from "@/components/Button";
 import Heading from "@/components/Heading";
-import { Ingredient } from "@/lib/types";
+import { IngredientToEdit, NewIngredient, NewRecipeAction } from "@/lib/types";
 import NewIngredientModal from "./NewIngredientModal";
-import { useState } from "react";
+import { Dispatch, useState } from "react";
 import EditIngredientModal from "./EditIngredientModal";
-
-interface NewIngredient extends Omit<Ingredient, "_id"> {}
 
 export default function NewRecipeIngredients({
 	ingredients,
+	dispatch,
 }: {
 	ingredients: NewIngredient[];
+	dispatch: Dispatch<NewRecipeAction>;
 }) {
 	const [isNewModalOpen, setIsNewModalOpen] = useState(false);
 	const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-	const [ingredientBeingEdited, setIngredientBeingEdited] =
-		useState<NewIngredient>({ quantity: "", ingredient: "" });
+	const [ingredientToEdit, setIngredientToEdit] = useState<IngredientToEdit>({
+		quantity: "",
+		ingredient: "",
+	});
 	return (
 		<div className="bg-white border border-gray-300 rounded-md">
 			<Heading variant="h4" classOverrides="px-4 py-3">
@@ -33,7 +35,7 @@ export default function NewRecipeIngredients({
 							hover:bg-emerald-200
 							cursor-pointer"
 						onClick={() => {
-							setIngredientBeingEdited({ ingredient, quantity });
+							setIngredientToEdit({ ingredient, quantity });
 							setIsEditModalOpen(true);
 						}}
 					>
@@ -48,10 +50,13 @@ export default function NewRecipeIngredients({
 			>
 				Add
 			</Button>
-			{isNewModalOpen && <NewIngredientModal setOpen={setIsNewModalOpen} />}
+			{isNewModalOpen && (
+				<NewIngredientModal dispatch={dispatch} setOpen={setIsNewModalOpen} />
+			)}
 			{isEditModalOpen && (
 				<EditIngredientModal
-					ingredient={ingredientBeingEdited}
+					ingredient={ingredientToEdit}
+					dispatch={dispatch}
 					setOpen={setIsEditModalOpen}
 				/>
 			)}

@@ -51,3 +51,27 @@ export interface NewMeal {
 }
 
 export type HeadingVariants = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+
+export interface NewIngredient extends Omit<Ingredient, "_id"> {}
+
+export interface IngredientToEdit extends NewIngredient {}
+
+export interface NewRecipeState extends Omit<NewRecipe, "slug"> {}
+
+export interface NewRecipeAction {
+	type:
+		| "edited_name"
+		| "edited_description"
+		| "added_ingredient"
+		| "edited_ingredient"
+		| "deleted_ingredient"
+		| "added_direction"
+		| "edited_direction"
+		| "deleted_direction";
+	directionToEdit?: string;
+	newDirection?: string;
+	ingredientToEdit?: IngredientToEdit;
+	newIngredient?: NewIngredient;
+	newName?: string;
+	newDescription?: string;
+}

@@ -2,7 +2,6 @@
 
 import slugify from "slugify";
 import { useMutation } from "@tanstack/react-query";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { newRecipeMutator as mutationFn } from "@/lib/mutators";
 import Input from "@/components/Input";
@@ -30,6 +29,8 @@ export default function NewRecipePage() {
 		mutation.mutate({ ...state, slug: slugify(state.name) });
 	};
 
+	console.log(state);
+
 	return (
 		<Form props={{ onSubmit }}>
 			<Heading>New recipe</Heading>
@@ -44,6 +45,7 @@ export default function NewRecipePage() {
 							type: "edited_name",
 							newName: e.target.value,
 						}),
+					value: state.name,
 				}}
 			/>
 			<TextArea
@@ -56,9 +58,13 @@ export default function NewRecipePage() {
 							type: "edited_description",
 							newDescription: e.target.value,
 						}),
+					value: state.description,
 				}}
 			/>
-			<NewRecipeIngredients ingredients={state.ingredients} />
+			<NewRecipeIngredients
+				ingredients={state.ingredients}
+				dispatch={dispatch}
+			/>
 
 			<Button props={{ type: "submit" }}>Create new recipe</Button>
 			{mutation.isError && (

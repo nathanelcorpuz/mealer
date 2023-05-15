@@ -1,7 +1,6 @@
-import { Ingredient, NewRecipe } from "@/lib/types";
+import jsonCopy from "@/lib/jsonCopy";
+import { NewRecipeAction, NewRecipeState } from "@/lib/types";
 import { Reducer, useReducer } from "react";
-
-interface NewRecipeState extends Omit<NewRecipe, "slug"> {}
 
 const initialState: NewRecipeState = {
 	name: "",
@@ -19,37 +18,51 @@ const initialState: NewRecipeState = {
 	],
 };
 
-export interface NewRecipeAction {
-	type:
-		| "edited_name"
-		| "edited_description"
-		| "added_ingredient"
-		| "edited_ingredient"
-		| "deleted_ingredient"
-		| "added_direction"
-		| "edited_direction"
-		| "deleted_direction";
-	newDirection?: string;
-	newIngredient?: Ingredient;
-	newName?: string;
-	newDescription?: string;
-}
-
 const reducer: Reducer<NewRecipeState, NewRecipeAction> = (
 	state: NewRecipeState,
 	action: NewRecipeAction
 ) => {
 	if (action.type === "edited_name") {
-		return state;
+		return {
+			...state,
+			name: action.newName === undefined ? "" : action.newName,
+		};
 	}
 	if (action.type === "edited_description") {
-		return state;
+		return {
+			...state,
+			description:
+				action.newDescription === undefined ? "" : action.newDescription,
+		};
 	}
-	if (action.type === "added_ingredient") {
-		return state;
+	if (action.type === "added_ingredient" && action.newIngredient) {
+		const stateClone: NewRecipeState = jsonCopy(state);
+		return {
+			...stateClone,
+			ingredients: [...stateClone.ingredients, action.newIngredient],
+		};
 	}
-	if (action.type === "edited_ingredient") {
-		return state;
+	if (action.type === "edited_ingredient" && action.ingredientToEdit) {
+		const { ingredientToEdit, newIngredient } = action;
+		const stateClone: NewRecipeState = jsonCopy(state);
+		const ingredientsCopy = [...stateClone.ingredients];
+		const updatedIngredients = ingredientsCopy.map(
+			({ quantity, ingredient }) => {
+				if (
+					ingredientToEdit &&
+					newIngredient &&
+					quantity === ingredientToEdit.quantity &&
+					ingredient === ingredientToEdit.ingredient
+				) {
+					return newIngredient;
+				}
+				return { quantity, ingredient };
+			}
+		);
+		return {
+			...stateClone,
+			ingredients: updatedIngredients,
+		};
 	}
 	if (action.type === "deleted_ingredient") {
 		return state;

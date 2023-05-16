@@ -5,7 +5,7 @@ import ModalButtonsWrapper from "@/components/ModalButtonsWrapper";
 import ModalWrapper from "@/components/ModalWrapper";
 import { NewRecipeAction } from "@/lib/types";
 import { Dispatch, SetStateAction, useState } from "react";
-import DeleteDirectionConfirmation from "./DeleteDirectionConfirmation";
+import YesNoConfirmation from "@/components/YesNoConfirmation";
 
 export default function EditDirectionModal({
 	targetDirection,
@@ -66,7 +66,8 @@ export default function EditDirectionModal({
 				</Button>
 			</ModalButtonsWrapper>
 			{isDeleteConfirmationOpen ? (
-				<DeleteDirectionConfirmation
+				<YesNoConfirmation
+					heading="Delete this direction?"
 					onNo={onDeleteConfirmationNo}
 					onYes={onDeleteConfirmationYes}
 				/>

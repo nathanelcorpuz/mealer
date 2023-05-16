@@ -5,7 +5,7 @@ import ModalButtonsWrapper from "@/components/ModalButtonsWrapper";
 import ModalWrapper from "@/components/ModalWrapper";
 import { NewRecipeAction, TargetIngredient } from "@/lib/types";
 import { Dispatch, SetStateAction, useState } from "react";
-import DeleteIngredientConfirmation from "./DeleteIngredientConfirmation";
+import YesNoConfirmation from "@/components/YesNoConfirmation";
 
 export default function EditIngredientModal({
 	targetIngredient,
@@ -86,7 +86,8 @@ export default function EditIngredientModal({
 				</Button>
 			</ModalButtonsWrapper>
 			{isDeleteConfirmationOpen ? (
-				<DeleteIngredientConfirmation
+				<YesNoConfirmation
+					heading="Delete this ingredient?"
 					onNo={onDeleteConfirmationNo}
 					onYes={onDeleteConfirmationYes}
 				/>

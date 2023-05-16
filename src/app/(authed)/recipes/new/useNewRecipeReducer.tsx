@@ -79,16 +79,41 @@ const reducer: Reducer<NewRecipeState, NewRecipeAction> = (
 			ingredients: newIngredients,
 		};
 	}
-	if (action.type === "added_direction") {
-		return state;
+	if (action.type === "added_direction" && action.newDirection) {
+		const { newDirection } = action;
+		const stateClone: NewRecipeState = jsonCopy(state);
+		const newDirections = [...stateClone.directions, newDirection];
+		return { ...stateClone, directions: newDirections };
 	}
-	if (action.type === "edited_direction") {
-		return state;
+	if (action.type === "edited_direction" && action.targetDirection) {
+		const { targetDirection, newDirection } = action;
+		const stateClone: NewRecipeState = jsonCopy(state);
+		const directionsCopy = [...stateClone.directions];
+		const updatedDirections = directionsCopy.map((direction) => {
+			if (targetDirection && newDirection && direction === targetDirection) {
+				return newDirection;
+			}
+			return direction;
+		});
+		return {
+			...stateClone,
+			directions: updatedDirections,
+		};
 	}
 	if (action.type === "deleted_direction") {
-		return state;
+		const { targetDirection } = action;
+		const stateClone: NewRecipeState = jsonCopy(state);
+		const newDirections = [...stateClone.directions];
+		const indexToDelete = newDirections.findIndex(
+			(direction) => direction === targetDirection
+		);
+		newDirections.splice(indexToDelete, 1);
+		return {
+			...stateClone,
+			directions: newDirections,
+		};
 	}
-	return state;
+	return { ...state };
 };
 
 export default function useNewRecipeReducer() {

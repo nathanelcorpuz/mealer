@@ -12,6 +12,7 @@ import Heading from "@/components/Heading";
 import ErrorText from "@/components/ErrorText";
 import NewRecipeIngredients from "./NewRecipeIngredients";
 import useNewRecipeReducer from "./useNewRecipeReducer";
+import NewRecipeDirections from "./NewRecipeDirections";
 
 export default function NewRecipePage() {
 	const router = useRouter();
@@ -65,7 +66,7 @@ export default function NewRecipePage() {
 				ingredients={state.ingredients}
 				dispatch={dispatch}
 			/>
-
+			<NewRecipeDirections directions={state.directions} dispatch={dispatch} />
 			<Button props={{ type: "submit" }}>Create new recipe</Button>
 			{mutation.isError && (
 				<ErrorText>{(mutation.error as Error).message}</ErrorText>

@@ -6,6 +6,7 @@ import Heading from "@/components/Heading";
 import TextArea from "@/components/TextArea";
 import { UserData } from "@/lib/types";
 import useNewMealFormDropdowns from "./useNewMealFormDropdowns";
+import Button from "@/components/Button";
 
 export default function NewMealForm({ user }: { user: UserData }) {
 	const { daysOfWeek, timesOfDay, recipes, controls } = useNewMealFormDropdowns(
@@ -35,6 +36,7 @@ export default function NewMealForm({ user }: { user: UserData }) {
 				labelProps={{ htmlFor: "notes" }}
 				textAreaProps={{ id: "notes" }}
 			/>
+			<Button>Submit</Button>
 		</Form>
 	);
 }

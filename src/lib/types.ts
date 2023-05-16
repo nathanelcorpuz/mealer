@@ -1,6 +1,3 @@
-import { DayOfWeek, TimeOfDay } from "@/db/models/Meal";
-import { Types } from "mongoose";
-
 export interface Credentials {
 	username: string;
 	password: string;
@@ -9,16 +6,17 @@ export interface Credentials {
 export interface UserData {
 	username: string;
 	recipes: Recipe[];
+	meals: Meal[];
 }
 
 export interface Ingredient {
-	_id: string | undefined;
+	_id: string;
 	ingredient: string;
 	quantity: string;
 }
 
 export interface Recipe {
-	_id: string | undefined;
+	_id: string;
 	name: string;
 	slug: string;
 	description: string;
@@ -41,13 +39,6 @@ export interface FormRecipe {
 
 export interface RecipeId {
 	_id: string;
-}
-
-export interface NewMeal {
-	recipeId: Types.ObjectId;
-	timeOfDay: TimeOfDay;
-	dayOfWeek: DayOfWeek;
-	notes: string;
 }
 
 export type HeadingVariants = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
@@ -75,4 +66,41 @@ export interface RecipeReducerAction {
 	newIngredient?: FormIngredient;
 	newName?: string;
 	newDescription?: string;
+}
+
+export type TimeOfDay =
+	| "breakfast"
+	| "brunch"
+	| "lunch"
+	| "afternoon"
+	| "dinner"
+	| "midnight";
+
+export type DayOfWeek =
+	| "sunday"
+	| "monday"
+	| "tuesday"
+	| "wednesday"
+	| "thursday"
+	| "friday"
+	| "saturday";
+
+export interface NewMeal {
+	recipeId: string;
+	timeOfDay: TimeOfDay;
+	dayOfWeek: DayOfWeek;
+	notes: string;
+}
+
+export interface Meal {
+	_id: string;
+	recipeId: Recipe;
+	timeOfDay: TimeOfDay;
+	dayOfWeek: DayOfWeek;
+	notes: string;
+}
+
+export interface DropdownSelection {
+	value: string;
+	label: string;
 }

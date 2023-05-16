@@ -1,23 +1,7 @@
+import { DayOfWeek, TimeOfDay } from "@/lib/types";
 import mongoose, { Types } from "mongoose";
 
 const { Schema, model, models } = mongoose;
-
-export type TimeOfDay =
-	| "breakfast"
-	| "brunch"
-	| "lunch"
-	| "afternoon-snack"
-	| "dinner"
-	| "midnight-snack";
-
-export type DayOfWeek =
-	| "sunday"
-	| "monday"
-	| "tuesday"
-	| "wednesday"
-	| "thursday"
-	| "friday"
-	| "saturday";
 
 export interface MealModel {
 	userId: Types.ObjectId;

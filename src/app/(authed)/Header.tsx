@@ -6,7 +6,7 @@ export default function Header() {
 		<HeaderWrapper>
 			<CustomLink href="/">Home</CustomLink>
 			<CustomLink href="recipes">Recipes</CustomLink>
-			{/* <CustomLink href="meals">Meals</CustomLink> */}
+			<CustomLink href="meals">Meals</CustomLink>
 			{/* <CustomLink href="logout">Logout</CustomLink> */}
 		</HeaderWrapper>
 	);

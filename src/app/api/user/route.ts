@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { routeHandlerError } from "@/lib/routeHandlerError";
 import tokenVerifier from "@/lib/tokenVerifier";
 import Recipe from "@/db/models/Recipe";
-import Meal from "@/db/models/Meal";
+import Meal, { MealDocument } from "@/db/models/Meal";
 
 export async function GET() {
 	try {
@@ -16,7 +16,12 @@ export async function GET() {
 		const meals = await Meal.find(
 			{ userId: user?._id, isDeleted: false },
 			{ userId: 0 }
-		);
+		)
+			.populate({
+				path: "recipeId",
+				select: "-userId -isDeleted -dateCreated",
+			})
+			.exec();
 
 		const data = {
 			username: user?.username,

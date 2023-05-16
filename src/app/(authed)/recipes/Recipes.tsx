@@ -8,13 +8,14 @@ import Heading from "@/components/Heading";
 import IconButton from "@/components/IconButton";
 import ClickableListItem from "@/components/ClickableListItem";
 import { useRouter } from "next/navigation";
+import ContentWrapper from "../ContentWrapper";
 
 export default function Recipes() {
 	const userQuery = useUserQuery();
 	const router = useRouter();
 
 	return (
-		<section className="flex flex-col gap-[30px]">
+		<ContentWrapper>
 			<div className="flex gap-[20px] items-center">
 				<Heading>Recipes</Heading>
 				<IconButton
@@ -39,6 +40,6 @@ export default function Recipes() {
 						))}
 				</ul>
 			</div>
-		</section>
+		</ContentWrapper>
 	);
 }

@@ -1,3 +1,4 @@
+import PageWrapper from "@/components/PageWrapper";
 import DeleteRecipe from "./DeleteRecipe";
 
 export default function DeleteRecipePage({
@@ -5,5 +6,9 @@ export default function DeleteRecipePage({
 }: {
 	params: { slug: string };
 }) {
-	return <DeleteRecipe slug={params.slug} />;
+	return (
+		<PageWrapper>
+			<DeleteRecipe slug={params.slug} />
+		</PageWrapper>
+	);
 }

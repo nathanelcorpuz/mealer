@@ -16,7 +16,7 @@ export default function Recipe({ slug }: { slug: string }) {
 	}
 
 	return (
-		<section>
+		<section className="max-w-[550px] mx-auto p-4 sm:p-8 border border-gray-300 rounded-md">
 			{recipe.isLoading && (
 				<Heading variant="h5">Loading {slug.replace(/-/g, " ")}...</Heading>
 			)}

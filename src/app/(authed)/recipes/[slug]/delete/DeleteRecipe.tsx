@@ -6,6 +6,9 @@ import Link from "next/link";
 import { deleteRecipeMutator as mutationFn } from "@/lib/mutators";
 import { useRouter } from "next/navigation";
 import useRecipeQuery from "@/hooks/queries/useRecipeQuery";
+import Heading from "@/components/Heading";
+import YesNoConfirmation from "@/components/YesNoConfirmation";
+import Button from "@/components/Button";
 
 export default function DeleteRecipe({ slug }: { slug: string }) {
 	const recipeQuery = useRecipeQuery({ slug });
@@ -26,28 +29,22 @@ export default function DeleteRecipe({ slug }: { slug: string }) {
 	};
 
 	return (
-		<main>
+		<section className="max-w-[450px] mx-auto">
 			{recipeQuery.isLoading && <p>Loading recipe....</p>}
 			{recipeQuery.isSuccess && recipeData !== undefined && (
-				<div className="flex flex-col items-start">
-					<p>Delete this recipe?</p>
-					<p>{recipeData.name}</p>
-					<form onSubmit={onSubmit}>
-						<button
-							className="px-4 py-2 bg-red-500 text-white"
-							disabled={mutation.isLoading}
-						>
-							Delete
-						</button>
-					</form>
-					<Link
-						href={`/recipe/${slug}`}
-						className="px-4 py-2 border-2 border-gray-950 block"
-					>
-						Back
-					</Link>
+				<div className="flex flex-col items-start gap-[20px]">
+					<Heading>Delete this recipe?</Heading>
+					<p className="py-2">{recipeData.name}</p>
+					<div className="flex gap-[50px] items-center">
+						<Link href={`/recipes/${slug}`}>
+							<Button variant="secondary">Back</Button>
+						</Link>
+						<form onSubmit={onSubmit}>
+							<Button classOverrides="py-2 px-8">Yes</Button>
+						</form>
+					</div>
 				</div>
 			)}
-		</main>
+		</section>
 	);
 }

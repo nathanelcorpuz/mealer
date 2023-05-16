@@ -13,6 +13,7 @@ import ErrorText from "@/components/ErrorText";
 import useRecipeReducer from "../utils/useRecipeReducer";
 import FormRecipeIngredients from "../_components/FormRecipeIngredients";
 import FormRecipeDirections from "../_components/FormRecipeDirections";
+import Link from "next/link";
 
 export default function NewRecipeForm() {
 	const router = useRouter();

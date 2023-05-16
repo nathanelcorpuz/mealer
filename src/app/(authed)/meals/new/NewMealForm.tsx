@@ -4,63 +4,13 @@ import Dropdown from "@/components/Dropdown";
 import Form from "@/components/Form";
 import Heading from "@/components/Heading";
 import TextArea from "@/components/TextArea";
-import useDropdown from "@/hooks/useDropdown";
-import capitalize from "@/lib/capitalize";
-import {
-	daysOfWeek as daysOfWeekConst,
-	timesOfDay as timesOfDayConst,
-} from "@/lib/constants";
-import { DayOfWeek, TimeOfDay, UserData } from "@/lib/types";
-
-interface DayOfWeekDropdownSelection {
-	value: DayOfWeek | "empty";
-	label: string;
-}
-
-interface TimeOfDayDropdownSelection {
-	value: TimeOfDay | "empty";
-	label: string;
-}
-
-interface RecipeDropdownSelection {
-	value: string;
-	label: string;
-}
+import { UserData } from "@/lib/types";
+import useNewMealFormDropdowns from "./useNewMealFormDropdowns";
 
 export default function NewMealForm({ user }: { user: UserData }) {
-	const daysOfWeek: DayOfWeekDropdownSelection[] = daysOfWeekConst.map(
-		(day) => ({
-			value: day,
-			label: capitalize(day),
-		})
+	const { daysOfWeek, timesOfDay, recipes, controls } = useNewMealFormDropdowns(
+		{ userRecipes: user.recipes }
 	);
-
-	const timesOfDay: TimeOfDayDropdownSelection[] = timesOfDayConst.map(
-		(time) => ({
-			value: time,
-			label: capitalize(time),
-		})
-	);
-
-	const recipes: RecipeDropdownSelection[] = user.recipes.map(
-		({ _id, name }) => ({
-			value: _id,
-			label: name,
-		})
-	);
-
-	const { controls: dayOfWeekDropdownControls } = useDropdown({
-		label: "",
-		value: "empty",
-	});
-	const { controls: timeOfDayDropdownControls } = useDropdown({
-		label: "",
-		value: "empty",
-	});
-	const { controls: recipeDropdownControls } = useDropdown({
-		label: "",
-		value: "empty",
-	});
 
 	return (
 		<Form>
@@ -68,17 +18,17 @@ export default function NewMealForm({ user }: { user: UserData }) {
 			<Dropdown
 				label="Day of week"
 				options={daysOfWeek}
-				controls={dayOfWeekDropdownControls}
+				controls={controls.dayOfWeekDropdownControls}
 			/>
 			<Dropdown
 				label="Time of day"
 				options={timesOfDay}
-				controls={timeOfDayDropdownControls}
+				controls={controls.timeOfDayDropdownControls}
 			/>
 			<Dropdown
 				label="Select a recipe"
 				options={recipes}
-				controls={recipeDropdownControls}
+				controls={controls.recipeDropdownControls}
 			/>
 			<TextArea
 				labelText="Notes"

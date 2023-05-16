@@ -9,6 +9,7 @@ import useRecipeQuery from "@/hooks/queries/useRecipeQuery";
 import Heading from "@/components/Heading";
 import YesNoConfirmation from "@/components/YesNoConfirmation";
 import Button from "@/components/Button";
+import Form from "@/components/Form";
 
 export default function DeleteRecipe({ slug }: { slug: string }) {
 	const recipeQuery = useRecipeQuery({ slug });
@@ -29,22 +30,26 @@ export default function DeleteRecipe({ slug }: { slug: string }) {
 	};
 
 	return (
-		<section className="max-w-[450px] mx-auto">
+		<Form props={{ onSubmit }}>
 			{recipeQuery.isLoading && <p>Loading recipe....</p>}
 			{recipeQuery.isSuccess && recipeData !== undefined && (
 				<div className="flex flex-col items-start gap-[20px]">
-					<Heading>Delete this recipe?</Heading>
-					<p className="py-2">{recipeData.name}</p>
+					<Heading variant="h4" classOverrides="text-red-600">
+						Delete this recipe?
+					</Heading>
+					<p className="font-bold text-emerald-700">{recipeData.name}</p>
 					<div className="flex gap-[50px] items-center">
 						<Link href={`/recipes/${slug}`}>
-							<Button variant="secondary">Back</Button>
+							<Button variant="secondary" props={{ type: "button" }}>
+								Back
+							</Button>
 						</Link>
-						<form onSubmit={onSubmit}>
-							<Button classOverrides="py-2 px-8">Yes</Button>
-						</form>
+						<Button classOverrides="py-2 px-8 bg-red-700 hover:bg-red-600">
+							Yes
+						</Button>
 					</div>
 				</div>
 			)}
-		</section>
+		</Form>
 	);
 }

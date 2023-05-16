@@ -41,7 +41,7 @@ export default function NewRecipeDirections({
 				))}
 			</ul>
 			<Button
-				classOverrides="w-[100%] py-2"
+				classOverrides="w-[100%] py-2 rounded-t-none"
 				props={{ type: "button", onClick: () => setIsNewModalOpen(true) }}
 			>
 				Add

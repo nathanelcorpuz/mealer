@@ -15,7 +15,7 @@ export default function NewIngredientModal({
 	setOpen: Dispatch<SetStateAction<boolean>>;
 	dispatch: Dispatch<NewRecipeAction>;
 }) {
-	const [ingredient, setIngredientValue] = useState<string>("Chicken Thigs");
+	const [ingredient, setIngredientValue] = useState<string>("Chicken Thighs");
 	const [quantity, setQuantity] = useState<string>("1 kg");
 
 	const onSubmit = () => {

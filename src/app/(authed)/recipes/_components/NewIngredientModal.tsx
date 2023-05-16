@@ -5,7 +5,7 @@ import Heading from "@/components/Heading";
 import Input from "@/components/Input";
 import ModalButtonsWrapper from "@/components/ModalButtonsWrapper";
 import ModalWrapper from "@/components/ModalWrapper";
-import { NewRecipeAction } from "@/lib/types";
+import { RecipeReducerAction } from "@/lib/types";
 import { Dispatch, SetStateAction, useState } from "react";
 
 export default function NewIngredientModal({
@@ -13,7 +13,7 @@ export default function NewIngredientModal({
 	dispatch,
 }: {
 	setOpen: Dispatch<SetStateAction<boolean>>;
-	dispatch: Dispatch<NewRecipeAction>;
+	dispatch: Dispatch<RecipeReducerAction>;
 }) {
 	const [ingredient, setIngredientValue] = useState<string>("Chicken Thighs");
 	const [quantity, setQuantity] = useState<string>("1 kg");

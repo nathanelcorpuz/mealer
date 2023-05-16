@@ -4,7 +4,7 @@ import Button from "@/components/Button";
 import Heading from "@/components/Heading";
 import Input from "@/components/Input";
 import ModalWrapper from "@/components/ModalWrapper";
-import { NewRecipeAction } from "@/lib/types";
+import { RecipeReducerAction } from "@/lib/types";
 import { Dispatch, SetStateAction, useState } from "react";
 
 export default function NewDirectionModal({
@@ -12,7 +12,7 @@ export default function NewDirectionModal({
 	dispatch,
 }: {
 	setOpen: Dispatch<SetStateAction<boolean>>;
-	dispatch: Dispatch<NewRecipeAction>;
+	dispatch: Dispatch<RecipeReducerAction>;
 }) {
 	const [newDirection, setNewDirection] = useState<string>("Sample");
 

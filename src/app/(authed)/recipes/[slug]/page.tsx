@@ -1,3 +1,4 @@
+import PageWrapper from "@/components/PageWrapper";
 import Recipe from "./Recipe";
 
 export default function RecipeDetailsPage({
@@ -5,5 +6,9 @@ export default function RecipeDetailsPage({
 }: {
 	params: { slug: string };
 }) {
-	return <Recipe slug={params.slug} />;
+	return (
+		<PageWrapper>
+			<Recipe slug={params.slug} />
+		</PageWrapper>
+	);
 }

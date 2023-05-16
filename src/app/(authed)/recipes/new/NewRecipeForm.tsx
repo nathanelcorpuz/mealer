@@ -10,14 +10,14 @@ import Button from "@/components/Button";
 import Form from "@/components/Form";
 import Heading from "@/components/Heading";
 import ErrorText from "@/components/ErrorText";
-import NewRecipeIngredients from "./NewRecipeIngredients";
-import useNewRecipeReducer from "./useNewRecipeReducer";
-import NewRecipeDirections from "./NewRecipeDirections";
+import useRecipeReducer from "../utils/useRecipeReducer";
+import FormRecipeIngredients from "../_components/FormRecipeIngredients";
+import FormRecipeDirections from "../_components/FormRecipeDirections";
 
-export default function NewRecipePage() {
+export default function NewRecipeForm() {
 	const router = useRouter();
 
-	const [state, dispatch] = useNewRecipeReducer();
+	const [state, dispatch] = useRecipeReducer();
 
 	const mutation = useMutation({ mutationFn });
 
@@ -29,8 +29,6 @@ export default function NewRecipePage() {
 		e.preventDefault();
 		mutation.mutate({ ...state, slug: slugify(state.name) });
 	};
-
-	console.log(state);
 
 	return (
 		<Form props={{ onSubmit }}>
@@ -62,11 +60,11 @@ export default function NewRecipePage() {
 					value: state.description,
 				}}
 			/>
-			<NewRecipeIngredients
+			<FormRecipeIngredients
 				ingredients={state.ingredients}
 				dispatch={dispatch}
 			/>
-			<NewRecipeDirections directions={state.directions} dispatch={dispatch} />
+			<FormRecipeDirections directions={state.directions} dispatch={dispatch} />
 			<Button props={{ type: "submit" }}>Create new recipe</Button>
 			{mutation.isError && (
 				<ErrorText>{(mutation.error as Error).message}</ErrorText>

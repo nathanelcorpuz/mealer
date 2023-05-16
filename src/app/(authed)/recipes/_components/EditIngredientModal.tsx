@@ -3,17 +3,17 @@ import Heading from "@/components/Heading";
 import Input from "@/components/Input";
 import ModalButtonsWrapper from "@/components/ModalButtonsWrapper";
 import ModalWrapper from "@/components/ModalWrapper";
-import { NewRecipeAction, TargetIngredient } from "@/lib/types";
 import { Dispatch, SetStateAction, useState } from "react";
 import YesNoConfirmation from "@/components/YesNoConfirmation";
+import { FormIngredient, RecipeReducerAction } from "@/lib/types";
 
 export default function EditIngredientModal({
 	targetIngredient,
 	dispatch,
 	setOpen,
 }: {
-	targetIngredient: TargetIngredient;
-	dispatch: Dispatch<NewRecipeAction>;
+	targetIngredient: FormIngredient;
+	dispatch: Dispatch<RecipeReducerAction>;
 	setOpen: Dispatch<SetStateAction<boolean>>;
 }) {
 	const [ingredientValue, setIngredientValue] = useState<string>(

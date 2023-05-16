@@ -1,3 +1,4 @@
+import PageWrapper from "@/components/PageWrapper";
 import EditRecipe from "./EditRecipe";
 
 export default function EditRecipePage({
@@ -5,5 +6,9 @@ export default function EditRecipePage({
 }: {
 	params: { slug: string };
 }) {
-	return <EditRecipe slug={params.slug} />;
+	return (
+		<PageWrapper>
+			<EditRecipe slug={params.slug} />
+		</PageWrapper>
+	);
 }

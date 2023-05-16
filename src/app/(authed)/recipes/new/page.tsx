@@ -1,10 +1,10 @@
 import PageWrapper from "@/components/PageWrapper";
-import NewRecipe from "./NewRecipe";
+import NewRecipeForm from "./NewRecipeForm";
 
 export default function NewRecipePage() {
 	return (
 		<PageWrapper>
-			<NewRecipe />
+			<NewRecipeForm />
 		</PageWrapper>
 	);
 }

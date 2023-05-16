@@ -26,17 +26,17 @@ export interface Recipe {
 	ingredients: Ingredient[];
 }
 
-export interface NewIngredient {
+export interface FormIngredient {
 	ingredient: string;
 	quantity: string;
 }
 
-export interface NewRecipe {
+export interface FormRecipe {
 	name: string;
 	slug: string;
 	description: string;
 	directions: string[];
-	ingredients: NewIngredient[];
+	ingredients: FormIngredient[];
 }
 
 export interface RecipeId {
@@ -52,13 +52,14 @@ export interface NewMeal {
 
 export type HeadingVariants = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
-export interface NewIngredient extends Omit<Ingredient, "_id"> {}
+export interface RecipeReducerState {
+	name: string;
+	description: string;
+	ingredients: FormIngredient[];
+	directions: string[];
+}
 
-export interface TargetIngredient extends NewIngredient {}
-
-export interface NewRecipeState extends Omit<NewRecipe, "slug"> {}
-
-export interface NewRecipeAction {
+export interface RecipeReducerAction {
 	type:
 		| "edited_name"
 		| "edited_description"
@@ -70,8 +71,8 @@ export interface NewRecipeAction {
 		| "deleted_direction";
 	targetDirection?: string;
 	newDirection?: string;
-	targetIngredient?: TargetIngredient;
-	newIngredient?: NewIngredient;
+	targetIngredient?: FormIngredient;
+	newIngredient?: FormIngredient;
 	newName?: string;
 	newDescription?: string;
 }

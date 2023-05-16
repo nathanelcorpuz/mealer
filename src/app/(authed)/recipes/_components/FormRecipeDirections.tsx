@@ -2,17 +2,17 @@
 
 import Button from "@/components/Button";
 import Heading from "@/components/Heading";
-import { NewRecipeAction } from "@/lib/types";
+import { RecipeReducerAction } from "@/lib/types";
 import { Dispatch, useState } from "react";
 import NewDirectionModal from "./NewDirectionModal";
 import EditDirectionModal from "./EditDirectionModal";
 
-export default function NewRecipeDirections({
+export default function FormRecipeDirections({
 	directions,
 	dispatch,
 }: {
 	directions: string[];
-	dispatch: Dispatch<NewRecipeAction>;
+	dispatch: Dispatch<RecipeReducerAction>;
 }) {
 	const [isNewModalOpen, setIsNewModalOpen] = useState<boolean>(false);
 	const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);

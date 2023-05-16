@@ -3,6 +3,8 @@
 import { Recipe } from "@/lib/types";
 import Link from "next/link";
 import useRecipeQuery from "@/hooks/queries/useRecipeQuery";
+import Heading from "@/components/Heading";
+import Button from "@/components/Button";
 
 export default function Recipe({ slug }: { slug: string }) {
 	const recipe = useRecipeQuery({ slug });
@@ -14,41 +16,47 @@ export default function Recipe({ slug }: { slug: string }) {
 	}
 
 	return (
-		<main>
-			{recipe.isLoading && <p>Loading your recipe...</p>}
+		<section>
+			{recipe.isLoading && (
+				<Heading variant="h5">Loading {slug.replace(/-/g, " ")}...</Heading>
+			)}
 			{recipe.isSuccess && recipeData !== undefined && (
 				<div className="flex flex-col gap-[30px] items-start">
-					<p>{recipeData.name}</p>
+					<Heading variant="h1">{recipeData.name}</Heading>
 					<p>{recipeData.description}</p>
-					<div className="flex flex-col gap-[10px]">
-						<p className="text-3xl">Ingredients</p>
+					<div className="flex flex-col gap-[10px] w-[100%]">
+						<Heading variant="h3">Ingredients</Heading>
 						{recipeData.ingredients.map(({ ingredient, quantity }) => (
-							<div key={ingredient}>
+							<div
+								key={ingredient}
+								className="flex justify-between border-b border-gray-300 py-2 gap-1"
+							>
 								<p>{ingredient}</p>
-								<p>Quantity: {quantity}</p>
+								<p className="">{quantity}</p>
 							</div>
 						))}
 					</div>
-					<div className="flex flex-col gap-[10px]">
-						<p className="text-3xl">Directions</p>
+					<div className="flex flex-col gap-[10px] w-[100%]">
+						<Heading variant="h3">Directions</Heading>
 						{recipeData.directions.map((direction) => (
-							<p key={direction}>{direction}</p>
+							<p
+								key={direction}
+								className="border-b border-gray-300 py-2 gap-1"
+							>
+								{direction}
+							</p>
 						))}
 					</div>
-					<Link
-						className="py-[8px] px-[20px] bg-gray-950 text-white"
-						href={`/recipe/${slug}/edit`}
-					>
-						Edit
-					</Link>
-					<Link
-						className="py-[8px] px-[20px] bg-gray-950 text-white"
-						href={`/recipe/${slug}/delete`}
-					>
-						Delete
-					</Link>
+					<div className="flex flex-col w-[100%] gap-[10px]">
+						<Link href={`/recipes/${slug}/edit`}>
+							<Button classOverrides="w-[100%]">Edit</Button>
+						</Link>
+						<Link href={`/recipes/${slug}/delete`}>
+							<Button classOverrides="w-[100%]">Delete</Button>
+						</Link>
+					</div>
 				</div>
 			)}
-		</main>
+		</section>
 	);
 }

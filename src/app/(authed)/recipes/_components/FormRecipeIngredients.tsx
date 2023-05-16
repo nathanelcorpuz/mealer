@@ -2,21 +2,21 @@
 
 import Button from "@/components/Button";
 import Heading from "@/components/Heading";
-import { TargetIngredient, NewIngredient, NewRecipeAction } from "@/lib/types";
 import NewIngredientModal from "./NewIngredientModal";
 import { Dispatch, useState } from "react";
 import EditIngredientModal from "./EditIngredientModal";
+import { FormIngredient, RecipeReducerAction } from "@/lib/types";
 
-export default function NewRecipeIngredients({
+export default function FormRecipeIngredients({
 	ingredients,
 	dispatch,
 }: {
-	ingredients: NewIngredient[];
-	dispatch: Dispatch<NewRecipeAction>;
+	ingredients: FormIngredient[];
+	dispatch: Dispatch<RecipeReducerAction>;
 }) {
 	const [isNewModalOpen, setIsNewModalOpen] = useState<boolean>(false);
 	const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
-	const [targetIngredient, setTargetIngredient] = useState<TargetIngredient>({
+	const [targetIngredient, setTargetIngredient] = useState<FormIngredient>({
 		quantity: "",
 		ingredient: "",
 	});

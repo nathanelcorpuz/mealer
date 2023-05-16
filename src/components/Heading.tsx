@@ -47,7 +47,9 @@ export default function Heading({
 	}
 	if (variant === "h6") {
 		return (
-			<h6 className={`uppercase font-black ${classOverrides} emerald-700"`}>
+			<h6
+				className={`uppercase font-black text-emerald-700 ${classOverrides}`}
+			>
 				{children}
 			</h6>
 		);

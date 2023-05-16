@@ -14,8 +14,6 @@ export default function Meals() {
 	const router = useRouter();
 	const userQuery = useUserQuery();
 
-	console.log(userQuery);
-
 	return (
 		<ContentWrapper>
 			<div className="flex gap-[20px] items-center">

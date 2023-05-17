@@ -4,23 +4,32 @@ import Dropdown from "@/components/Dropdown";
 import Form from "@/components/Form";
 import Heading from "@/components/Heading";
 import TextArea from "@/components/TextArea";
-import { DayOfWeek, NewMeal, TimeOfDay, UserData } from "@/lib/types";
+import {
+	DayOfWeek,
+	EditMeal,
+	MutationResult,
+	NewMeal,
+	TimeOfDay,
+	UserData,
+} from "@/lib/types";
 import useMealFormDropdowns from "../_utils/useMealFormDropdowns";
 import Button from "@/components/Button";
 import { FormEvent, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { newMealMutator as mutationFn } from "@/lib/mutators";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import ErrorText from "@/components/ErrorText";
 
 export default function MealForm({
 	user,
 	mealId,
+	mutationFn,
 }: {
 	user: UserData;
 	mealId?: string;
+	mutationFn: any;
 }) {
 	const mutation = useMutation({ mutationFn });
+	const pathname = usePathname();
 
 	const router = useRouter();
 
@@ -50,21 +59,35 @@ export default function MealForm({
 			recipeDropdownControls,
 		} = controls;
 
-		const payload: NewMeal = {
+		const payload: NewMeal | EditMeal = {
+			_id: mealId,
 			dayOfWeek: dayOfWeekDropdownControls.selection.value as DayOfWeek,
 			recipeId: recipeDropdownControls.selection.value,
 			timeOfDay: timeOfDayDropdownControls.selection.value as TimeOfDay,
 			notes,
 		};
 
-		const result = await mutation.mutateAsync(payload);
+		console.log(payload);
+
+		const result = (await mutation.mutateAsync(
+			payload as any
+		)) as MutationResult;
 
 		if (result.isSuccess) router.push("/meals");
 	};
 
 	return (
 		<Form props={{ onSubmit }}>
-			<Heading>New Meal</Heading>
+			<Button
+				variant="secondary"
+				classOverrides="self-start hover:bg-white"
+				props={{ onClick: () => router.back(), type: "button" }}
+			>
+				Back
+			</Button>
+			<Heading variant="h3">
+				{pathname.includes("edit") ? "Edit meal" : "New meal"}
+			</Heading>
 			<Dropdown
 				disabled={mutation.isLoading}
 				label="Day of week"

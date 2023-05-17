@@ -97,6 +97,10 @@ export interface NewMeal {
 	notes: string;
 }
 
+export interface EditMeal extends NewMeal {
+	_id: string;
+}
+
 export interface Meal {
 	_id: string;
 	recipeId: Recipe;
@@ -124,3 +128,7 @@ export type PasswordValidation = (
 	| "spaces"
 	| "symbols"
 )[];
+
+export type MutationResult = {
+	isSuccess: boolean;
+};

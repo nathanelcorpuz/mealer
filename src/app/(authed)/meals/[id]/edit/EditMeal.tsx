@@ -3,6 +3,7 @@
 import useUserQuery from "@/hooks/queries/useUserQuery";
 import MealForm from "../../_components/MealForm";
 import ErrorText from "@/components/ErrorText";
+import { editMealMutator as mutationFn } from "@/lib/mutators";
 
 export default function EditMeal({ id }: { id: string }) {
 	const userQuery = useUserQuery();
@@ -15,7 +16,7 @@ export default function EditMeal({ id }: { id: string }) {
 
 	return (
 		<section>
-			<MealForm user={userQuery.data} mealId={id} />
+			<MealForm mutationFn={mutationFn} user={userQuery.data} mealId={id} />
 		</section>
 	);
 }

@@ -10,8 +10,6 @@ import WeeklyMealPlan from "./_components/WeeklyMealPlan";
 export default function Home() {
 	const userQuery = useUserQuery();
 
-	console.log(userQuery);
-
 	if (userQuery.isError) {
 		return <section>Something went wrong...</section>;
 	}
@@ -22,7 +20,11 @@ export default function Home() {
 			daysOfWeek[new Date().getDay()]
 		);
 		return (
-			<section className="flex flex-col gap-[40px]">
+			<section
+				className="flex flex-col gap-[40px] 
+			 rounded-lg max-w-[550px] mx-auto
+			 p-8 border border-gray-300"
+			>
 				<TodaysMealPlan mealPlan={mealPlan} />
 				<WeeklyMealPlan userData={userQuery.data} />
 			</section>

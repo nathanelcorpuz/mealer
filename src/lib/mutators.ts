@@ -2,6 +2,7 @@ import fetcher from "./fetcher";
 import {
 	Credentials,
 	EditFormRecipe,
+	EditMeal,
 	FormRecipe,
 	NewMeal,
 	RecipeId,
@@ -27,3 +28,6 @@ export const deleteRecipeMutator = (payload: RecipeId) =>
 
 export const newMealMutator = (payload: NewMeal) =>
 	fetcher.post("http://localhost:3000/api/meal", payload);
+
+export const editMealMutator = (payload: EditMeal) =>
+	fetcher.put("http://localhost:3000/api/meal", payload);

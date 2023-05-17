@@ -30,7 +30,7 @@ export default function Button({
 	if (variant === "secondary") {
 		return (
 			<button
-				className={`text-sm hover:text-emerald-700 p-2 
+				className={`text-sm hover:text-emerald-700 p-2
 						hover:bg-gray-200 disabled:opacity-[0.5] rounded-md ${classOverrides}`}
 				disabled={disabled}
 				{...props}

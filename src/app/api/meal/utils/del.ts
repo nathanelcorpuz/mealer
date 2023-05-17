@@ -15,7 +15,7 @@ export default async function del(request: NextRequest) {
 
 		await user.updateOne({ $pull: { recipeIds: _id } });
 
-		return NextResponse.json({ success: true, message: "Meal deleted" });
+		return NextResponse.json({ isSuccess: true });
 	} catch (error) {
 		return routeHandlerError(error as Error);
 	}

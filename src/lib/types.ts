@@ -109,6 +109,10 @@ export interface Meal {
 	notes: string;
 }
 
+export interface MealId {
+	_id: string;
+}
+
 export interface DropdownSelection {
 	value: string;
 	label: string;

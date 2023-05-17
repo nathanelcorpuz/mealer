@@ -1,3 +1,5 @@
+"use client";
+
 import useRecipeReducer from "../../utils/useRecipeReducer";
 import { RecipeReducerState } from "@/lib/types";
 import RecipeForm from "../../_components/RecipeForm";

@@ -5,7 +5,6 @@ import { EditMeal } from "@/lib/types";
 import { NextRequest, NextResponse } from "next/server";
 
 export default async (request: NextRequest) => {
-	// wip
 	try {
 		const user = await tokenVerifier();
 		if (!user) throw new Error("Account error");

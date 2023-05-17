@@ -4,6 +4,7 @@ import {
 	EditFormRecipe,
 	EditMeal,
 	FormRecipe,
+	MealId,
 	NewMeal,
 	RecipeId,
 } from "./types";
@@ -31,3 +32,6 @@ export const newMealMutator = (payload: NewMeal) =>
 
 export const editMealMutator = (payload: EditMeal) =>
 	fetcher.put("http://localhost:3000/api/meal", payload);
+
+export const deleteMealMutator = (payload: MealId) =>
+	fetcher.del("http://localhost:3000/api/meal?_id=" + payload._id);

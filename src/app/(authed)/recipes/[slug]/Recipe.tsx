@@ -5,6 +5,8 @@ import Link from "next/link";
 import useRecipeQuery from "@/hooks/queries/useRecipeQuery";
 import Heading from "@/components/Heading";
 import Button from "@/components/Button";
+import ContentWrapper from "@/components/ContentWrapper";
+import BackButton from "@/components/BackButton";
 
 export default function Recipe({ slug }: { slug: string }) {
 	const recipe = useRecipeQuery({ slug });
@@ -16,12 +18,13 @@ export default function Recipe({ slug }: { slug: string }) {
 	}
 
 	return (
-		<section className="max-w-[550px] mx-auto p-4 sm:p-8 border border-gray-300 rounded-md">
+		<ContentWrapper>
 			{recipe.isLoading && (
 				<Heading variant="h5">Loading {slug.replace(/-/g, " ")}...</Heading>
 			)}
 			{recipe.isSuccess && recipeData !== undefined && (
 				<div className="flex flex-col gap-[30px] items-start">
+					<BackButton isHoverWhite />
 					<Heading variant="h3">{recipeData.name}</Heading>
 					<p>{recipeData.description}</p>
 					<div className="flex flex-col gap-[10px] w-[100%]">
@@ -57,6 +60,6 @@ export default function Recipe({ slug }: { slug: string }) {
 					</div>
 				</div>
 			)}
-		</section>
+		</ContentWrapper>
 	);
 }

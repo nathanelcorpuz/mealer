@@ -18,6 +18,7 @@ import { FormEvent, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { usePathname, useRouter } from "next/navigation";
 import ErrorText from "@/components/ErrorText";
+import BackButton from "@/components/BackButton";
 
 export default function MealForm({
 	user,
@@ -76,13 +77,7 @@ export default function MealForm({
 
 	return (
 		<Form props={{ onSubmit }}>
-			<Button
-				variant="secondary"
-				classOverrides="self-start hover:bg-white"
-				props={{ onClick: () => router.back(), type: "button" }}
-			>
-				Back
-			</Button>
+			<BackButton isHoverWhite />
 			<Heading variant="h3">
 				{pathname.includes("edit") ? "Edit meal" : "New meal"}
 			</Heading>

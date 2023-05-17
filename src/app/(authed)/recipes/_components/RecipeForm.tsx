@@ -9,6 +9,7 @@ import FormRecipeIngredients from "../_components/FormRecipeIngredients";
 import FormRecipeDirections from "../_components/FormRecipeDirections";
 import { RecipeReducerAction, RecipeReducerState } from "@/lib/types";
 import { Dispatch, FormEventHandler } from "react";
+import BackButton from "@/components/BackButton";
 
 export default function RecipeForm({
 	disabled,
@@ -25,6 +26,7 @@ export default function RecipeForm({
 }) {
 	return (
 		<Form props={{ onSubmit }}>
+			<BackButton isHoverWhite />
 			<Heading variant="h3">{heading}</Heading>
 			<Input
 				labelText="Name"

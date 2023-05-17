@@ -52,7 +52,7 @@ export default function Dropdown({
 		<div ref={dropdownRef} className={`${disabled ? "opacity-[0.5]" : ""}`}>
 			<p className="text-sm text-gray-500 pb-1">{label}</p>
 			<div
-				className={`relative bg-white rounded-md p-2 border 
+				className={`relative bg-white rounded-md p-3 border 
 				border-gray-300 cursor-pointer hover:bg-gray-200 text-sm ${
 					selection.label === "" ? "text-gray-400" : ""
 				}`}
@@ -68,7 +68,7 @@ export default function Dropdown({
 						{selections.map((option) => (
 							<p
 								key={option.value}
-								className="p-2 cursor-pointer hover:bg-gray-200 text-sm"
+								className="p-3 cursor-pointer hover:bg-gray-200 text-sm"
 								onClick={(e) => {
 									e.stopPropagation();
 									if (disabled) return;

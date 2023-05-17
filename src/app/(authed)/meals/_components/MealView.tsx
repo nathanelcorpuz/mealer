@@ -1,23 +1,15 @@
-import Button from "@/components/Button";
 import Heading from "@/components/Heading";
 import capitalize from "@/lib/capitalize";
 import { Meal } from "@/lib/types";
-import { useRouter } from "next/navigation";
 import MealViewItemContainer from "./MealViewItemContainer";
+import BackButton from "@/components/BackButton";
 
 export default function MealView({ meal }: { meal: Meal }) {
-	const router = useRouter();
 	const ingredients = meal.recipeId.ingredients;
 	const directions = meal.recipeId.directions;
 	return (
 		<div className="flex flex-col gap-[20px] bg-gray-200 p-8 rounded-lg">
-			<Button
-				variant="secondary"
-				classOverrides="self-start"
-				props={{ onClick: () => router.back() }}
-			>
-				Back
-			</Button>
+			<BackButton isHoverWhite />
 			<Heading variant="h3">{meal.dayOfWeek} meal</Heading>
 			<MealViewItemContainer>
 				<p className="text-gray-500 text-sm">Schedule</p>

@@ -18,5 +18,9 @@ export default function EditRecipe({ slug }: { slug: string }) {
 		return <ErrorText>{(recipeQuery.error as Error).message}</ErrorText>;
 	}
 
-	return <EditRecipeForm recipe={recipeQuery.data} />;
+	const { _id, name, description, directions, ingredients } = recipeQuery.data;
+
+	const recipe = { name, description, directions, ingredients, slug };
+
+	return <EditRecipeForm _id={_id} recipe={recipe} />;
 }

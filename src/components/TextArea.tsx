@@ -11,12 +11,12 @@ export default function TextArea({
 }) {
 	return (
 		<div>
-			<label className="text-sm text-gray-500" {...labelProps}>
+			<label className="text-gray-500 text-xs" {...labelProps}>
 				{labelText}
 			</label>
 			<textarea
 				rows={5}
-				className="w-[100%] border border-gray-300 rounded-md p-2"
+				className="w-[100%] border border-gray-300 rounded-md p-3 text-sm"
 				{...textAreaProps}
 			/>
 		</div>

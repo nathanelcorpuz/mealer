@@ -9,7 +9,7 @@ export default function Button({
 	variant = "primary",
 	classOverrides,
 }: {
-	disabled: boolean;
+	disabled?: boolean;
 	children: React.ReactNode;
 	props?: ButtonHTMLAttributes<HTMLButtonElement>;
 	variant?: Variant;

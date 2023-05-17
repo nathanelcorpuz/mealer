@@ -9,7 +9,7 @@ export default function CustomLink({
 }) {
 	return (
 		<Link
-			className="px-4 py-2 text-sm text-gray-500 hover:text-emerald-700 hover:bg-emerald-200"
+			className="px-4 py-2 text-sm text-gray-500 hover:text-emerald-700 hover:bg-emerald-100"
 			href={href}
 		>
 			{children}

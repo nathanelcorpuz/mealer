@@ -22,26 +22,26 @@ export default function Recipe({ slug }: { slug: string }) {
 			)}
 			{recipe.isSuccess && recipeData !== undefined && (
 				<div className="flex flex-col gap-[30px] items-start">
-					<Heading variant="h1">{recipeData.name}</Heading>
+					<Heading variant="h3">{recipeData.name}</Heading>
 					<p>{recipeData.description}</p>
 					<div className="flex flex-col gap-[10px] w-[100%]">
-						<Heading variant="h3">Ingredients</Heading>
+						<Heading variant="h5">Ingredients</Heading>
 						{recipeData.ingredients.map(({ ingredient, quantity }) => (
 							<div
 								key={ingredient}
 								className="flex justify-between border-b border-gray-300 py-2 gap-1"
 							>
-								<p>{ingredient}</p>
-								<p>{quantity}</p>
+								<p className="text-sm">{ingredient}</p>
+								<p className="text-sm">{quantity}</p>
 							</div>
 						))}
 					</div>
 					<div className="flex flex-col gap-[10px] w-[100%]">
-						<Heading variant="h3">Directions</Heading>
+						<Heading variant="h5">Directions</Heading>
 						{recipeData.directions.map((direction) => (
 							<p
 								key={direction}
-								className="border-b border-gray-300 py-2 gap-1"
+								className="border-b border-gray-300 py-2 gap-1 text-sm"
 							>
 								{direction}
 							</p>

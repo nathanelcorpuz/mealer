@@ -8,9 +8,11 @@ import NewDirectionModal from "./NewDirectionModal";
 import EditDirectionModal from "./EditDirectionModal";
 
 export default function FormRecipeDirections({
+	disabled,
 	directions,
 	dispatch,
 }: {
+	disabled: boolean;
 	directions: string[];
 	dispatch: Dispatch<RecipeReducerAction>;
 }) {
@@ -29,20 +31,26 @@ export default function FormRecipeDirections({
 						type="button"
 						className="w-[100%] flex justify-between px-4 py-3 
 							hover:text-emerald-700
-							hover:bg-emerald-200
+							hover:bg-emerald-100
 							cursor-pointer"
 						onClick={() => {
 							setTargetDirection(direction);
 							setIsEditModalOpen(true);
 						}}
 					>
-						<p>{direction}</p>
+						<p className={`text-sm ${disabled && "opacity-[0.5]"}`}>
+							{direction}
+						</p>
 					</button>
 				))}
 			</ul>
 			<Button
 				classOverrides="w-[100%] py-2 rounded-t-none"
-				props={{ type: "button", onClick: () => setIsNewModalOpen(true) }}
+				props={{
+					type: "button",
+					onClick: () => setIsNewModalOpen(true),
+					disabled,
+				}}
 			>
 				Add
 			</Button>

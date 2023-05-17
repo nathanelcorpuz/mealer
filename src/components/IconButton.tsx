@@ -14,10 +14,10 @@ export default function IconButton({
 }) {
 	return (
 		<button
-			className={`hover:bg-emerald-200 rounded-lg p-[10px] flex items-center gap-[2px] ${classOverrides}`}
+			className={`hover:bg-emerald-100 rounded-lg p-[15px] flex items-center gap-[2px] ${classOverrides}`}
 			{...props}
 		>
-			<Image src={src} width={25} height={25} alt={alt} />
+			<Image src={src} width={15} height={15} alt={alt} />
 		</button>
 	);
 }

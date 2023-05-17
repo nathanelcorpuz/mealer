@@ -11,11 +11,10 @@ export default async function put(request: NextRequest) {
 
 		const updatedRecipeDoc = await Recipe.findByIdAndUpdate(
 			newRecipe._id,
-			newRecipe,
-			{ returnDocument: "after" }
+			newRecipe
 		);
 
-		return NextResponse.json(updatedRecipeDoc);
+		return NextResponse.json({ isSuccess: true });
 	} catch (error) {
 		return routeHandlerError(error as Error);
 	}

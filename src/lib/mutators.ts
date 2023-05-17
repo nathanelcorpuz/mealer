@@ -1,5 +1,5 @@
 import fetcher from "./fetcher";
-import { Credentials, FormRecipe, Recipe, RecipeId } from "./types";
+import { Credentials, EditFormRecipe, FormRecipe, RecipeId } from "./types";
 
 export const registerMutator = async (payload: Credentials) =>
 	fetcher.post("http://localhost:3000/api/auth/register", payload);
@@ -13,7 +13,7 @@ export const logoutMutator = () =>
 export const newRecipeMutator = (payload: FormRecipe) =>
 	fetcher.post("http://localhost:3000/api/recipe", payload);
 
-export const editRecipeMutator = (payload: Recipe) =>
+export const editRecipeMutator = (payload: EditFormRecipe) =>
 	fetcher.put("http://localhost:3000/api/recipe", payload);
 
 export const deleteRecipeMutator = (payload: RecipeId) =>

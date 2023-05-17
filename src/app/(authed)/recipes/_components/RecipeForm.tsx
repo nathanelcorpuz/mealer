@@ -11,11 +11,13 @@ import { RecipeReducerAction, RecipeReducerState } from "@/lib/types";
 import { Dispatch, FormEventHandler } from "react";
 
 export default function RecipeForm({
+	disabled,
 	state,
 	dispatch,
 	onSubmit,
 	heading,
 }: {
+	disabled: boolean;
 	state: RecipeReducerState;
 	dispatch: Dispatch<RecipeReducerAction>;
 	onSubmit: FormEventHandler<HTMLFormElement>;
@@ -23,7 +25,7 @@ export default function RecipeForm({
 }) {
 	return (
 		<Form props={{ onSubmit }}>
-			<Heading>{heading}</Heading>
+			<Heading variant="h3">{heading}</Heading>
 			<Input
 				labelText="Name"
 				labelProps={{ htmlFor: "name" }}
@@ -36,6 +38,7 @@ export default function RecipeForm({
 							newName: e.target.value,
 						}),
 					value: state.name,
+					disabled,
 				}}
 			/>
 			<TextArea
@@ -49,14 +52,20 @@ export default function RecipeForm({
 							newDescription: e.target.value,
 						}),
 					value: state.description,
+					disabled,
 				}}
 			/>
 			<FormRecipeIngredients
+				disabled={disabled}
 				ingredients={state.ingredients}
 				dispatch={dispatch}
 			/>
-			<FormRecipeDirections directions={state.directions} dispatch={dispatch} />
-			<Button props={{ type: "submit" }}>Submit</Button>
+			<FormRecipeDirections
+				disabled={disabled}
+				directions={state.directions}
+				dispatch={dispatch}
+			/>
+			<Button props={{ type: "submit", disabled }}>Submit</Button>
 		</Form>
 	);
 }

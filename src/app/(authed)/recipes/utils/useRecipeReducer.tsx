@@ -1,5 +1,5 @@
 import jsonCopy from "@/lib/jsonCopy";
-import { RecipeReducerAction, RecipeReducerState } from "@/lib/types";
+import { Recipe, RecipeReducerAction, RecipeReducerState } from "@/lib/types";
 import { Reducer, useReducer } from "react";
 
 const initialState: RecipeReducerState = {

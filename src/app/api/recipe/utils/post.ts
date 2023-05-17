@@ -18,7 +18,7 @@ export default async function post(request: NextRequest) {
 
 		await user?.updateOne({ $push: { recipes: newRecipeDoc._id } });
 
-		return NextResponse.json({ newRecipeDoc });
+		return NextResponse.json({ isSuccess: true });
 	} catch (error) {
 		return routeHandlerError(error as Error);
 	}

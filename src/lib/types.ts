@@ -37,6 +37,10 @@ export interface FormRecipe {
 	ingredients: FormIngredient[];
 }
 
+export interface EditFormRecipe extends FormRecipe {
+	_id: string;
+}
+
 export interface RecipeId {
 	_id: string;
 }
@@ -45,6 +49,7 @@ export type HeadingVariants = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
 export interface RecipeReducerState {
 	name: string;
+	slug: string;
 	description: string;
 	ingredients: FormIngredient[];
 	directions: string[];

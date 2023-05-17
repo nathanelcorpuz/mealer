@@ -6,29 +6,37 @@ import { useRouter } from "next/navigation";
 import { newRecipeMutator as mutationFn } from "@/lib/mutators";
 import useRecipeReducer from "../utils/useRecipeReducer";
 import RecipeForm from "../_components/RecipeForm";
+import ErrorText from "@/components/ErrorText";
+import { FormEvent } from "react";
 
-export default function NewRecipeForm() {
+export default function NewRecipe() {
 	const router = useRouter();
 
 	const [state, dispatch] = useRecipeReducer();
 
 	const mutation = useMutation({ mutationFn });
 
-	if (mutation.isSuccess) {
-		router.push("/recipe");
-	}
-
-	const onSubmit = (e: any) => {
+	const onSubmit = async (e: FormEvent) => {
 		e.preventDefault();
-		mutation.mutate({ ...state, slug: slugify(state.name) });
+		const result = await mutation.mutateAsync({
+			...state,
+			slug: slugify(state.name),
+		});
+		if (result.isSuccess) router.back();
 	};
 
 	return (
-		<RecipeForm
-			heading="Add new recipe"
-			state={state}
-			dispatch={dispatch}
-			onSubmit={onSubmit}
-		/>
+		<div>
+			<RecipeForm
+				disabled={mutation.isLoading}
+				heading="Add new recipe"
+				state={state}
+				dispatch={dispatch}
+				onSubmit={onSubmit}
+			/>
+			{mutation.isError && (
+				<ErrorText>{(mutation.error as Error).message}</ErrorText>
+			)}
+		</div>
 	);
 }

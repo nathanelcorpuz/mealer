@@ -29,7 +29,7 @@ export default function Recipes() {
 				<ul className="flex flex-col list-none">
 					{userQuery.isSuccess &&
 						userQuery.data.recipes.map((recipe: Recipe) => (
-							<ClickableListItem key={recipe.name}>
+							<ClickableListItem key={recipe._id}>
 								<Link
 									href={`/recipes/${recipe.slug}`}
 									className="w-[100%] h-[100%] block"

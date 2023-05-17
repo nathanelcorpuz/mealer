@@ -8,9 +8,11 @@ import EditIngredientModal from "./EditIngredientModal";
 import { FormIngredient, RecipeReducerAction } from "@/lib/types";
 
 export default function FormRecipeIngredients({
+	disabled,
 	ingredients,
 	dispatch,
 }: {
+	disabled: boolean;
 	ingredients: FormIngredient[];
 	dispatch: Dispatch<RecipeReducerAction>;
 }) {
@@ -32,21 +34,29 @@ export default function FormRecipeIngredients({
 						type="button"
 						className="w-[100%] flex justify-between px-4 py-3 
 							hover:text-emerald-700
-							hover:bg-emerald-200
+							hover:bg-emerald-100
 							cursor-pointer"
 						onClick={() => {
 							setTargetIngredient({ ingredient, quantity });
 							setIsEditModalOpen(true);
 						}}
 					>
-						<p>{ingredient}</p>
-						<p>{quantity}</p>
+						<p className={`text-sm ${disabled && "opacity-[0.5]"}`}>
+							{ingredient}
+						</p>
+						<p className={`text-sm ${disabled && "opacity-[0.5]"}`}>
+							{quantity}
+						</p>
 					</button>
 				))}
 			</ul>
 			<Button
 				classOverrides="w-[100%] py-2 rounded-t-none"
-				props={{ type: "button", onClick: () => setIsNewModalOpen(true) }}
+				props={{
+					type: "button",
+					onClick: () => setIsNewModalOpen(true),
+					disabled,
+				}}
 			>
 				Add
 			</Button>

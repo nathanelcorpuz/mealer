@@ -1,11 +1,10 @@
 "use client";
 
-import ErrorText from "@/components/ErrorText";
 import useUserQuery from "@/hooks/queries/useUserQuery";
-import { UserData } from "@/lib/types";
-import MealForm from "../_components/MealForm";
+import MealForm from "../../_components/MealForm";
+import ErrorText from "@/components/ErrorText";
 
-export default function NewMeal() {
+export default function EditMeal({ id }: { id: string }) {
 	const userQuery = useUserQuery();
 
 	if (userQuery.isLoading) return <p>Loading your data...</p>;
@@ -14,5 +13,9 @@ export default function NewMeal() {
 		return <ErrorText>{(userQuery.error as Error).message}</ErrorText>;
 	}
 
-	return <MealForm user={userQuery.data as UserData} />;
+	return (
+		<section>
+			<MealForm user={userQuery.data} mealId={id} />
+		</section>
+	);
 }

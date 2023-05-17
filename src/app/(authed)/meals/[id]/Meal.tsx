@@ -1,5 +1,6 @@
 import Button from "@/components/Button";
 import Heading from "@/components/Heading";
+import Link from "next/link";
 
 const ingredients = [
 	{
@@ -61,8 +62,14 @@ export default function Meal({ id }: { id: string }) {
 					</ul>
 				</div>
 			</div>
-			<Button>Edit</Button>
-			<Button>Delete</Button>
+			<div className="flex flex-col gap-[10px] pt-[10px]">
+				<Link className="block w-[100%]" href={`/meals/${id}/edit`}>
+					<Button classOverrides="w-[100%]">Edit</Button>
+				</Link>
+				<Link className="block w-[100%]" href={`/meals/${id}/delete`}>
+					<Button classOverrides="w-[100%]">Delete</Button>
+				</Link>
+			</div>
 		</section>
 	);
 }

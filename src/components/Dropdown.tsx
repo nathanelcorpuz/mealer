@@ -15,12 +15,12 @@ const defaultOptions = [
 ];
 
 export default function Dropdown({
-	options = defaultOptions,
+	selections = defaultOptions,
 	label = "Dropdown label",
 	controls,
 }: {
 	label: string;
-	options: DropdownSelection[];
+	selections: DropdownSelection[];
 	controls: {
 		isOpen: boolean;
 		setIsOpen: Dispatch<SetStateAction<boolean>>;
@@ -46,8 +46,6 @@ export default function Dropdown({
 		};
 	}, []);
 
-	console.log(selection);
-
 	return (
 		<div ref={dropdownRef}>
 			<p className="text-sm text-gray-500 pb-1">{label}</p>
@@ -62,7 +60,7 @@ export default function Dropdown({
         absolute left-[-1px] top-[115%] right-[-1px]
         z-[100] bg-white"
 					>
-						{options.map((option) => (
+						{selections.map((option) => (
 							<p
 								key={option.value}
 								className="p-2 cursor-pointer hover:bg-gray-200"

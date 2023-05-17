@@ -21,10 +21,16 @@ interface RecipeDropdownSelection {
 	label: string;
 }
 
-export default function useNewMealFormDropdowns({
+export default function useMealFormDropdowns({
 	userRecipes,
+	defaultValues,
 }: {
 	userRecipes: Recipe[];
+	defaultValues?: {
+		dayOfWeek: string | undefined;
+		timeOfDay: string | undefined;
+		recipeId: string | undefined;
+	};
 }) {
 	const daysOfWeek: DayOfWeekDropdownSelection[] = daysOfWeekConst.map(
 		(day) => ({
@@ -47,18 +53,32 @@ export default function useNewMealFormDropdowns({
 		})
 	);
 
-	const { controls: dayOfWeekDropdownControls } = useDropdown({
+	const emptyInitialSelection = {
 		label: "",
-		value: "empty",
-	});
-	const { controls: timeOfDayDropdownControls } = useDropdown({
-		label: "",
-		value: "empty",
-	});
-	const { controls: recipeDropdownControls } = useDropdown({
-		label: "",
-		value: "empty",
-	});
+		value: "",
+	};
+
+	const initialDayOfWeekSelection = daysOfWeek.find(
+		(day) => day.value === defaultValues?.dayOfWeek
+	) || { ...emptyInitialSelection };
+
+	const initialTimeOfDaySelection = timesOfDay.find(
+		(timeOfDay) => timeOfDay.value === defaultValues?.timeOfDay
+	) || { ...emptyInitialSelection };
+
+	const initialRecipeSelection = recipes.find(
+		(recipe) => recipe.value === defaultValues?.recipeId
+	) || { ...emptyInitialSelection };
+
+	const { controls: dayOfWeekDropdownControls } = useDropdown(
+		initialDayOfWeekSelection
+	);
+	const { controls: timeOfDayDropdownControls } = useDropdown(
+		initialTimeOfDaySelection
+	);
+	const { controls: recipeDropdownControls } = useDropdown(
+		initialRecipeSelection
+	);
 
 	const controls = {
 		dayOfWeekDropdownControls,

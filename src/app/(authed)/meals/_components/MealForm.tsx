@@ -67,8 +67,6 @@ export default function MealForm({
 			notes,
 		};
 
-		console.log(payload);
-
 		const result = (await mutation.mutateAsync(
 			payload as any
 		)) as MutationResult;

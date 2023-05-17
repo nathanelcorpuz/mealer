@@ -7,7 +7,7 @@ import MealPlanDisplay from "./MealPlanDisplay";
 export default function MealPlan({ mealPlan }: { mealPlan: MealPlan }) {
 	return (
 		<section className="flex flex-col gap-[20px]">
-			<Heading variant="h1">Today's meals</Heading>
+			<Heading variant="h3">Today's meals</Heading>
 			<MealPlanDisplay size="large" mealPlan={mealPlan} />
 		</section>
 	);

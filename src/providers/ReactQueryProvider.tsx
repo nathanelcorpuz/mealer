@@ -10,7 +10,7 @@ export default function ReactQueryProvider({
 	children: React.ReactNode;
 }) {
 	const [client] = useState(
-		new QueryClient({ defaultOptions: { queries: { staleTime: 5000 } } })
+		new QueryClient({ defaultOptions: { queries: { staleTime: 1 } } })
 	);
 
 	return (

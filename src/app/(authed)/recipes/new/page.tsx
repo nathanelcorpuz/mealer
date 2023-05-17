@@ -1,5 +1,5 @@
 import PageWrapper from "@/components/PageWrapper";
-import NewRecipeForm from "./NewRecipeForm";
+import NewRecipe from "./NewRecipe";
 import Link from "next/link";
 import Button from "@/components/Button";
 
@@ -9,7 +9,7 @@ export default function NewRecipePage() {
 			<Link href="/recipes" className="mb-2 block">
 				<Button variant="secondary">Back</Button>
 			</Link>
-			<NewRecipeForm />
+			<NewRecipe />
 		</PageWrapper>
 	);
 }

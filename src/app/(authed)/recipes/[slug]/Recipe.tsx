@@ -32,7 +32,7 @@ export default function Recipe({ slug }: { slug: string }) {
 								className="flex justify-between border-b border-gray-300 py-2 gap-1"
 							>
 								<p>{ingredient}</p>
-								<p className="">{quantity}</p>
+								<p>{quantity}</p>
 							</div>
 						))}
 					</div>

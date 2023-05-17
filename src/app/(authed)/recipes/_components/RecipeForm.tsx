@@ -1,38 +1,29 @@
 "use client";
 
-import slugify from "slugify";
-import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
-import { newRecipeMutator as mutationFn } from "@/lib/mutators";
 import Input from "@/components/Input";
 import TextArea from "@/components/TextArea";
 import Button from "@/components/Button";
 import Form from "@/components/Form";
 import Heading from "@/components/Heading";
-import ErrorText from "@/components/ErrorText";
-import useRecipeReducer from "../utils/useRecipeReducer";
 import FormRecipeIngredients from "../_components/FormRecipeIngredients";
 import FormRecipeDirections from "../_components/FormRecipeDirections";
+import { RecipeReducerAction, RecipeReducerState } from "@/lib/types";
+import { Dispatch, FormEventHandler } from "react";
 
-export default function NewRecipeForm() {
-	const router = useRouter();
-
-	const [state, dispatch] = useRecipeReducer();
-
-	const mutation = useMutation({ mutationFn });
-
-	if (mutation.isSuccess) {
-		router.push("/recipe");
-	}
-
-	const onSubmit = (e: any) => {
-		e.preventDefault();
-		mutation.mutate({ ...state, slug: slugify(state.name) });
-	};
-
+export default function RecipeForm({
+	state,
+	dispatch,
+	onSubmit,
+	heading,
+}: {
+	state: RecipeReducerState;
+	dispatch: Dispatch<RecipeReducerAction>;
+	onSubmit: FormEventHandler<HTMLFormElement>;
+	heading: string;
+}) {
 	return (
 		<Form props={{ onSubmit }}>
-			<Heading>New recipe</Heading>
+			<Heading>{heading}</Heading>
 			<Input
 				labelText="Name"
 				labelProps={{ htmlFor: "name" }}
@@ -65,10 +56,7 @@ export default function NewRecipeForm() {
 				dispatch={dispatch}
 			/>
 			<FormRecipeDirections directions={state.directions} dispatch={dispatch} />
-			<Button props={{ type: "submit" }}>Create new recipe</Button>
-			{mutation.isError && (
-				<ErrorText>{(mutation.error as Error).message}</ErrorText>
-			)}
+			<Button props={{ type: "submit" }}>Submit</Button>
 		</Form>
 	);
 }

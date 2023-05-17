@@ -8,7 +8,7 @@ export default function ErrorText({
 	props?: HTMLAttributes<HTMLParagraphElement>;
 }) {
 	return (
-		<p className="text-center p-4 text-red-500 italic" {...props}>
+		<p className="text-center text-sm p-4 text-red-500 italic" {...props}>
 			{children}
 		</p>
 	);

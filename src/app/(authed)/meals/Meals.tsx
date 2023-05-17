@@ -9,6 +9,7 @@ import useUserQuery from "@/hooks/queries/useUserQuery";
 import { Meal, Recipe } from "@/lib/types";
 import ClickableListItem from "@/components/ClickableListItem";
 import Link from "next/link";
+import capitalize from "@/lib/capitalize";
 
 export default function Meals() {
 	const router = useRouter();
@@ -31,8 +32,15 @@ export default function Meals() {
 						{(userQuery.data.meals as Meal[]).map((meal) => (
 							<ClickableListItem key={meal._id}>
 								<Link href={`/meals/${meal._id}`}>
-									<p className="text-gray-500 group-hover:text-gray-300 text-sm">{`${meal.dayOfWeek} - ${meal.timeOfDay}`}</p>
-									<p className="font-bold">{(meal.recipeId as Recipe).name}</p>
+									<p
+										className="text-gray-500 
+									group-hover:text-gray-300 text-sm"
+									>{`${capitalize(meal.dayOfWeek)} - ${capitalize(
+										meal.timeOfDay
+									)}`}</p>
+									<p className="font-bold">
+										{capitalize((meal.recipeId as Recipe).name)}
+									</p>
 								</Link>
 							</ClickableListItem>
 						))}

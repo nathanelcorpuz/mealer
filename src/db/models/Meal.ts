@@ -25,10 +25,10 @@ const daysOfWeek = [
 const timesOfDay = [
 	"breakfast",
 	"brunch",
-	"lunch", 
-	"afternoon-snack",
+	"lunch",
+	"afternoon",
 	"dinner",
-	"midnight-snack",
+	"midnight",
 ];
 
 const mealSchema = new Schema<MealModel>({
@@ -36,7 +36,7 @@ const mealSchema = new Schema<MealModel>({
 	recipeId: { type: Schema.Types.ObjectId, required: true, ref: "Recipe" },
 	timeOfDay: { type: String, enum: timesOfDay, required: true },
 	dayOfWeek: { type: String, enum: daysOfWeek, required: true },
-	notes: { type: String, required: true },
+	notes: { type: String, default: "" },
 	isDeleted: { type: Boolean, default: false },
 });
 

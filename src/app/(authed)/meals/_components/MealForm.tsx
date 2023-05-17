@@ -4,10 +4,14 @@ import Dropdown from "@/components/Dropdown";
 import Form from "@/components/Form";
 import Heading from "@/components/Heading";
 import TextArea from "@/components/TextArea";
-import { UserData } from "@/lib/types";
+import { DayOfWeek, NewMeal, TimeOfDay, UserData } from "@/lib/types";
 import useMealFormDropdowns from "../_utils/useMealFormDropdowns";
 import Button from "@/components/Button";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { newMealMutator as mutationFn } from "@/lib/mutators";
+import { useRouter } from "next/navigation";
+import ErrorText from "@/components/ErrorText";
 
 export default function MealForm({
 	user,
@@ -16,6 +20,10 @@ export default function MealForm({
 	user: UserData;
 	mealId?: string;
 }) {
+	const mutation = useMutation({ mutationFn });
+
+	const router = useRouter();
+
 	const meal = user.meals.find((meal) => meal._id === mealId);
 
 	const recipeId = meal?.recipeId._id;
@@ -33,20 +41,44 @@ export default function MealForm({
 		defaultValues,
 	});
 
+	const onSubmit = async (e: FormEvent) => {
+		e.preventDefault();
+
+		const {
+			dayOfWeekDropdownControls,
+			timeOfDayDropdownControls,
+			recipeDropdownControls,
+		} = controls;
+
+		const payload: NewMeal = {
+			dayOfWeek: dayOfWeekDropdownControls.selection.value as DayOfWeek,
+			recipeId: recipeDropdownControls.selection.value,
+			timeOfDay: timeOfDayDropdownControls.selection.value as TimeOfDay,
+			notes,
+		};
+
+		const result = await mutation.mutateAsync(payload);
+
+		if (result.isSuccess) router.push("/meals");
+	};
+
 	return (
-		<Form>
+		<Form props={{ onSubmit }}>
 			<Heading>New Meal</Heading>
 			<Dropdown
+				disabled={mutation.isLoading}
 				label="Day of week"
 				selections={daysOfWeek}
 				controls={controls.dayOfWeekDropdownControls}
 			/>
 			<Dropdown
+				disabled={mutation.isLoading}
 				label="Time of day"
 				selections={timesOfDay}
 				controls={controls.timeOfDayDropdownControls}
 			/>
 			<Dropdown
+				disabled={mutation.isLoading}
 				label="Select a recipe"
 				selections={recipes}
 				controls={controls.recipeDropdownControls}
@@ -55,12 +87,16 @@ export default function MealForm({
 				labelText="Notes"
 				labelProps={{ htmlFor: "notes" }}
 				textAreaProps={{
+					disabled: mutation.isLoading,
 					id: "notes",
 					value: notes,
 					onChange: (e) => setNotes(e.target.value),
 				}}
 			/>
-			<Button>Submit</Button>
+			<Button disabled={mutation.isLoading}>Submit</Button>
+			{mutation.isError && (
+				<ErrorText>{(mutation.error as Error).message}</ErrorText>
+			)}
 		</Form>
 	);
 }

@@ -10,8 +10,7 @@ export default function WeeklyMealPlan({ userData }: { userData: UserData }) {
 			<Heading variant="h3">Weekly meal plan</Heading>
 			{daysOfWeek.map((day) => {
 				const dailyMealPlan = getMealPlan(userData, day);
-				console.log(dailyMealPlan);
-				return <MealPlanDisplay mealPlan={dailyMealPlan} />;
+				return <MealPlanDisplay key={day} mealPlan={dailyMealPlan} />;
 			})}
 		</section>
 	);

@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import Header from "./Header";
+import Header from "./_components/Header";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
 	const cookieStore = cookies();

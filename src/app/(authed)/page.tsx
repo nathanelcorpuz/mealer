@@ -1,8 +1,10 @@
-export default function Home() {
+import PageWrapper from "@/components/PageWrapper";
+import Home from "./Home";
+
+export default function HomePage() {
 	return (
-		<main className="flex min-h-screen flex-col items-center justify-between p-24">
-			{/* will show weekly meal plan */}
-			<h1>Weekly meal plan coming soon</h1>
-		</main>
+		<PageWrapper>
+			<Home />
+		</PageWrapper>
 	);
 }

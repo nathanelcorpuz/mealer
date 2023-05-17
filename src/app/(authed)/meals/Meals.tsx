@@ -2,7 +2,7 @@
 
 import addNewIcon from "../../../../public/add-new-icon.png";
 import Heading from "@/components/Heading";
-import ContentWrapper from "../ContentWrapper";
+import ContentWrapper from "../../../components/ContentWrapper";
 import IconButton from "@/components/IconButton";
 import { useRouter } from "next/navigation";
 import useUserQuery from "@/hooks/queries/useUserQuery";

@@ -25,7 +25,7 @@ const daysOfWeek = [
 const timesOfDay = [
 	"breakfast",
 	"brunch",
-	"lunch",
+	"lunch", 
 	"afternoon-snack",
 	"dinner",
 	"midnight-snack",

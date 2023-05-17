@@ -8,7 +8,7 @@ import Heading from "@/components/Heading";
 import IconButton from "@/components/IconButton";
 import ClickableListItem from "@/components/ClickableListItem";
 import { useRouter } from "next/navigation";
-import ContentWrapper from "../ContentWrapper";
+import ContentWrapper from "../../../components/ContentWrapper";
 
 export default function Recipes() {
 	const userQuery = useUserQuery();

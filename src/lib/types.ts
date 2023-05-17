@@ -104,3 +104,8 @@ export interface DropdownSelection {
 	value: string;
 	label: string;
 }
+
+export interface MealPlan {
+	dayOfWeek: DayOfWeek;
+	meals: Meal[];
+}

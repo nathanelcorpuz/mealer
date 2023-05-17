@@ -12,7 +12,6 @@ export default () => {
 
 	const onYes = async () => {
 		const result = await logoutMutation.mutateAsync();
-		console.log(result);
 		if (result.isSuccess) {
 			router.push("/login");
 		}

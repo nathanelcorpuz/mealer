@@ -109,3 +109,13 @@ export interface MealPlan {
 	dayOfWeek: DayOfWeek;
 	meals: Meal[];
 }
+
+export type PasswordValidation = (
+	| undefined
+	| "min"
+	| "uppercase"
+	| "lowercase"
+	| "digits"
+	| "spaces"
+	| "symbols"
+)[];

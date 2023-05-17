@@ -4,25 +4,21 @@ import { useMutation } from "@tanstack/react-query";
 import { loginMutator as mutationFn } from "@/lib/mutators";
 import { useState } from "react";
 import Form from "@/components/Form";
-import Input from "@/components/Input";
 import Button from "@/components/Button";
 import ErrorText from "@/components/ErrorText";
 import { useRouter } from "next/navigation";
+import Heading from "@/components/Heading";
+import Username from "../_components/Username";
+import Password from "../_components/Password";
 
 export default function Login() {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
+	const [showPassword, setShowPassword] = useState(false);
 
 	const router = useRouter();
 
 	const mutation = useMutation({ mutationFn });
-
-	if (mutation.isLoading || mutation.isSuccess)
-		return <p className="text-center">Logging you in</p>;
-
-	if (mutation.isSuccess) {
-		return <p className="text-center">Login success! Redirecting...</p>;
-	}
 
 	return (
 		<Form
@@ -34,27 +30,20 @@ export default function Login() {
 				},
 			}}
 		>
-			<Input
-				labelText="Username"
-				labelProps={{ htmlFor: "username" }}
-				inputProps={{
-					type: "text",
-					id: "username",
-					onChange: (e: any) => setUsername(e.target.value),
-					value: username,
-				}}
+			<Heading variant="h3">Log back in</Heading>
+			<Username
+				disabled={mutation.isLoading || mutation.isSuccess}
+				username={username}
+				setUsername={setUsername}
 			/>
-			<Input
-				labelText="Password"
-				labelProps={{ htmlFor: "password" }}
-				inputProps={{
-					type: "password",
-					id: "password",
-					onChange: (e: any) => setPassword(e.target.value),
-					value: password,
-				}}
+			<Password
+				disabled={mutation.isLoading || mutation.isSuccess}
+				password={password}
+				setPassword={setPassword}
+				showPassword={showPassword}
+				setShowPassword={setShowPassword}
 			/>
-			<Button>Login</Button>
+			<Button disabled={mutation.isLoading || mutation.isSuccess}>Login</Button>
 			{mutation.isError && (
 				<ErrorText>{(mutation.error as Error).message}</ErrorText>
 			)}

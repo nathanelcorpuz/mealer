@@ -1,3 +1,4 @@
+import Meal from "@/db/models/Meal";
 import Recipe from "@/db/models/Recipe";
 import { routeHandlerError } from "@/lib/routeHandlerError";
 import tokenVerifier from "@/lib/tokenVerifier";
@@ -13,6 +14,8 @@ export default async function del(request: NextRequest) {
 		const _id = searchParams.get("_id");
 
 		await Recipe.findByIdAndUpdate(_id, { isDeleted: true });
+
+		await Meal.updateMany({ recipeId: _id }, { isDeleted: true });
 
 		await user?.updateOne({ isDeleted: true });
 

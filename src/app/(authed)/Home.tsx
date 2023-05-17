@@ -10,6 +10,8 @@ import WeeklyMealPlan from "./_components/WeeklyMealPlan";
 export default function Home() {
 	const userQuery = useUserQuery();
 
+	console.log(userQuery);
+
 	if (userQuery.isError) {
 		return <section>Something went wrong...</section>;
 	}

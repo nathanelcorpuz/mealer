@@ -1,7 +1,5 @@
 "use client";
 
-import Button from "@/components/Button";
-import Link from "next/link";
 import MealView from "../_components/MealView";
 import useMealQuery from "@/hooks/queries/useMealQuery";
 import { Meal } from "@/lib/types";

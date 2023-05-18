@@ -1,6 +1,10 @@
 import { PasswordValidation } from "@/lib/types";
 
-export default ({ validation }: { validation: PasswordValidation }) => {
+export default function passwordValidation({
+	validation,
+}: {
+	validation: PasswordValidation;
+}) {
 	return (
 		<div>
 			{validation.map((error) => {
@@ -49,4 +53,4 @@ export default ({ validation }: { validation: PasswordValidation }) => {
 			})}
 		</div>
 	);
-};
+}

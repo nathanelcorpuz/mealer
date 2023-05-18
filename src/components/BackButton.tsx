@@ -1,7 +1,11 @@
 import { useRouter } from "next/navigation";
 import Button from "./Button";
 
-export default ({ isHoverWhite }: { isHoverWhite?: boolean }) => {
+export default function BackButton({
+	isHoverWhite,
+}: {
+	isHoverWhite?: boolean;
+}) {
 	const router = useRouter();
 	return (
 		<Button
@@ -16,4 +20,4 @@ export default ({ isHoverWhite }: { isHoverWhite?: boolean }) => {
 			Back
 		</Button>
 	);
-};
+}

@@ -1,7 +1,7 @@
 import { PasswordValidation } from "@/lib/types";
 import PasswordValidator from "password-validator";
 
-export default (password: string): PasswordValidation => {
+export default function validatePassword(password: string): PasswordValidation {
 	const schema = new PasswordValidator();
 	schema
 		.is()
@@ -21,4 +21,4 @@ export default (password: string): PasswordValidation => {
 		.symbols(1);
 
 	return schema.validate(password, { list: true }) as PasswordValidation;
-};
+}

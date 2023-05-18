@@ -53,7 +53,7 @@ export default function Dropdown({
 		return () => {
 			document.removeEventListener("mousedown", handleClickOutside);
 		};
-	}, []);
+	}, [setIsOpen]);
 
 	let selectionLabel;
 

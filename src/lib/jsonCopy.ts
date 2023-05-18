@@ -1,1 +1,3 @@
-export default (obj: any) => JSON.parse(JSON.stringify(obj));
+export default function jsonCopy(obj: any) {
+	return JSON.parse(JSON.stringify(obj));
+}

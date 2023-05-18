@@ -5,7 +5,7 @@ import hiddenIcon from "../../../../public/hidden-icon.png";
 import { Dispatch, SetStateAction } from "react";
 import slugify from "slugify";
 
-interface Password {
+interface PasswordInterface {
 	disabled: boolean;
 	password: string;
 	setPassword: Dispatch<SetStateAction<string>>;
@@ -14,14 +14,14 @@ interface Password {
 	label?: string;
 }
 
-export default ({
+export default function Password({
 	disabled,
 	password,
 	setPassword,
 	showPassword,
 	setShowPassword,
 	label = "Password",
-}: Password) => {
+}: PasswordInterface) {
 	return (
 		<div className="relative">
 			<Input
@@ -61,4 +61,4 @@ export default ({
 			)}
 		</div>
 	);
-};
+}

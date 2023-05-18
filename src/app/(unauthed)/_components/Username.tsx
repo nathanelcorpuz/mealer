@@ -7,16 +7,22 @@ interface Username {
 	setUsername: Dispatch<SetStateAction<string>>;
 }
 
-export default ({ disabled, username, setUsername }: Username) => (
-	<Input
-		labelText="Username"
-		labelProps={{ htmlFor: "username" }}
-		inputProps={{
-			disabled,
-			type: "text",
-			id: "username",
-			value: username,
-			onChange: (e) => setUsername(e.target.value),
-		}}
-	/>
-);
+export default function Username({
+	disabled,
+	username,
+	setUsername,
+}: Username) {
+	return (
+		<Input
+			labelText="Username"
+			labelProps={{ htmlFor: "username" }}
+			inputProps={{
+				disabled,
+				type: "text",
+				id: "username",
+				value: username,
+				onChange: (e) => setUsername(e.target.value),
+			}}
+		/>
+	);
+}

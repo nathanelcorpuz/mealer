@@ -4,7 +4,7 @@ import tokenVerifier from "@/lib/tokenVerifier";
 import { EditMeal } from "@/lib/types";
 import { NextRequest, NextResponse } from "next/server";
 
-export default async (request: NextRequest) => {
+export default async function put(request: NextRequest) {
 	try {
 		const user = await tokenVerifier();
 		if (!user) throw new Error("Account error");
@@ -17,4 +17,4 @@ export default async (request: NextRequest) => {
 	} catch (error) {
 		return routeHandlerError(error as Error);
 	}
-};
+}

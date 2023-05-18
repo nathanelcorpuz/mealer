@@ -19,7 +19,7 @@ export default function Meal({ id }: { id: string }) {
 	let mealView;
 
 	if (userQuery.isLoading) {
-		mealView = <p>Loading your meal...</p>;
+		mealView = <p className="text-center">Loading your meal...</p>;
 	}
 
 	if (userQuery.isSuccess) {
@@ -45,7 +45,9 @@ export default function Meal({ id }: { id: string }) {
 			{mealView}
 			<div className="flex flex-col gap-[10px] pt-[10px]">
 				{mutation.isLoading ? (
-					<Button classOverrides="w-[100%]">Edit</Button>
+					<Button classOverrides="w-[100%]" disabled={mutation.isLoading}>
+						Edit
+					</Button>
 				) : (
 					<Link className="block w-[100%]" href={`/meals/${id}/edit`}>
 						<Button classOverrides="w-[100%]">Edit</Button>

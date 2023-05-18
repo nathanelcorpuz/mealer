@@ -3,6 +3,11 @@
 import { DropdownSelection } from "@/lib/types";
 import { Dispatch, SetStateAction, useEffect, useRef } from "react";
 
+const defaultSelection = {
+	value: "",
+	label: "",
+};
+
 const defaultOptions = [
 	{
 		value: "Sample 1",
@@ -17,12 +22,14 @@ const defaultOptions = [
 export default function Dropdown({
 	disabled,
 	selections = defaultOptions,
+	forcedSelection,
 	label = "Dropdown label",
 	controls,
 }: {
 	disabled: boolean;
 	label: string;
 	selections: DropdownSelection[];
+	forcedSelection?: DropdownSelection | null;
 	controls: {
 		isOpen: boolean;
 		setIsOpen: Dispatch<SetStateAction<boolean>>;
@@ -48,6 +55,17 @@ export default function Dropdown({
 		};
 	}, []);
 
+	let selectionLabel;
+
+	if (selection.label === "") {
+		selectionLabel = "Select an option";
+	} else {
+		selectionLabel = selection.label;
+	}
+
+	if (forcedSelection) {
+		selectionLabel = forcedSelection.label;
+	}
 	return (
 		<div ref={dropdownRef} className={`${disabled ? "opacity-[0.5]" : ""}`}>
 			<p className="text-sm text-gray-500 pb-1">{label}</p>
@@ -58,8 +76,8 @@ export default function Dropdown({
 				}`}
 				onClick={() => setIsOpen(true)}
 			>
-				<p>{selection.label === "" ? "Select an option " : selection.label}</p>
-				{isOpen ? (
+				<p>{selectionLabel}</p>
+				{isOpen && !forcedSelection ? (
 					<div
 						className="rounded-md border border-gray-300 text-black
         absolute left-[-1px] top-[115%] right-[-1px]

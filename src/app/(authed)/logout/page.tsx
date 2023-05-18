@@ -20,12 +20,14 @@ export default () => {
 
 	return (
 		<PageWrapper>
-			<YesNoConfirmation
-				heading="Are you sure you want to log out?"
-				onYes={onYes}
-				onNo={onNo}
-				disabled={logoutMutation.isLoading}
-			/>
+			<div className="max-w-[550px] mx-auto">
+				<YesNoConfirmation
+					heading="Are you sure you want to log out?"
+					onYes={onYes}
+					onNo={onNo}
+					disabled={logoutMutation.isLoading}
+				/>
+			</div>
 		</PageWrapper>
 	);
 };

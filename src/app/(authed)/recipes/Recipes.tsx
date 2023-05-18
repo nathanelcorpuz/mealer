@@ -25,7 +25,9 @@ export default function Recipes() {
 				/>
 			</div>
 			<div className="flex flex-col gap-[20px]">
-				{userQuery.isLoading && <p>Loading your recipes...</p>}
+				{userQuery.isLoading && (
+					<p className="text-center">Loading your recipes...</p>
+				)}
 				<ul className="flex flex-col list-none">
 					{userQuery.isSuccess &&
 						userQuery.data.recipes.map((recipe: Recipe) => (

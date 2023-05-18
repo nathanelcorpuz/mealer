@@ -3,6 +3,8 @@ import capitalize from "@/lib/capitalize";
 import { Meal } from "@/lib/types";
 import MealViewItemContainer from "./MealViewItemContainer";
 import BackButton from "@/components/BackButton";
+import Link from "next/link";
+import Button from "@/components/Button";
 
 export default function MealView({ meal }: { meal: Meal }) {
 	const ingredients = meal.recipeId.ingredients;
@@ -52,6 +54,14 @@ export default function MealView({ meal }: { meal: Meal }) {
 					</ul>
 				</div>
 			</MealViewItemContainer>
+			<div className="flex flex-col gap-[10px] pt-[10px]">
+				<Link className="block w-[100%]" href={`/meals/${meal._id}/edit`}>
+					<Button classOverrides="w-[100%]">Edit</Button>
+				</Link>
+				<Link className="block w-[100%]" href={`/meals/${meal._id}/delete`}>
+					<Button classOverrides="w-[100%]">Delete</Button>
+				</Link>
+			</div>
 		</div>
 	);
 }

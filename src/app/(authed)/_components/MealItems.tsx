@@ -14,6 +14,7 @@ export default function MealItems({
 				<MealItem
 					size={size}
 					key={meal._id}
+					id={meal._id}
 					schedule={meal.timeOfDay}
 					recipe={meal.recipeId.name}
 				/>

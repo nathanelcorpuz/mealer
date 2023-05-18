@@ -30,7 +30,9 @@ export default function DeleteRecipe({ slug }: { slug: string }) {
 
 	return (
 		<Form props={{ onSubmit }}>
-			{recipeQuery.isLoading && <p>Loading recipe....</p>}
+			{recipeQuery.isLoading && (
+				<p className="text-center">Loading recipe....</p>
+			)}
 			{recipeQuery.isSuccess && recipeData !== undefined && (
 				<div className="flex flex-col items-start gap-[20px]">
 					<Heading variant="h4" classOverrides="text-red-600">

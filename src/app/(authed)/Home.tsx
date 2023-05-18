@@ -31,5 +31,5 @@ export default function Home() {
 		);
 	}
 
-	return <section>Loading your data...</section>;
+	return <section className="text-center">Loading your data...</section>;
 }

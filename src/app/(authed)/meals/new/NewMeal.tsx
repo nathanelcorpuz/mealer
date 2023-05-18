@@ -9,7 +9,7 @@ import { newMealMutator as mutationFn } from "@/lib/mutators";
 export default function NewMeal() {
 	const userQuery = useUserQuery();
 
-	if (userQuery.isLoading) return <p>Loading your data...</p>;
+	if (userQuery.isLoading) return <p className="text-center">Loading your data...</p>;
 
 	if (userQuery.isError) {
 		return <ErrorText>{(userQuery.error as Error).message}</ErrorText>;

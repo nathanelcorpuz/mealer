@@ -6,6 +6,7 @@ import Heading from "@/components/Heading";
 import TextArea from "@/components/TextArea";
 import {
 	DayOfWeek,
+	DropdownSelection,
 	EditMeal,
 	MutationResult,
 	NewMeal,
@@ -14,22 +15,33 @@ import {
 } from "@/lib/types";
 import useMealFormDropdowns from "../_utils/useMealFormDropdowns";
 import Button from "@/components/Button";
-import { FormEvent, useState } from "react";
-import { useMutation } from "@tanstack/react-query";
+import { Dispatch, FormEvent, SetStateAction, useState } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { usePathname, useRouter } from "next/navigation";
 import ErrorText from "@/components/ErrorText";
 import BackButton from "@/components/BackButton";
+import capitalize from "@/lib/capitalize";
 
 export default function MealForm({
 	user,
+	forcedDayOfWeek,
 	mealId,
 	mutationFn,
+	setIsModalOpen,
 }: {
 	user: UserData;
+	forcedDayOfWeek?: DayOfWeek;
 	mealId?: string;
 	mutationFn: any;
+	setIsModalOpen?: Dispatch<SetStateAction<boolean>>;
 }) {
-	const mutation = useMutation({ mutationFn });
+	const queryClient = useQueryClient();
+
+	const mutation = useMutation({
+		mutationFn,
+		onSuccess: () => queryClient.invalidateQueries(["user"]),
+	});
+
 	const pathname = usePathname();
 
 	const router = useRouter();
@@ -39,9 +51,14 @@ export default function MealForm({
 	const recipeId = meal?.recipeId._id;
 
 	const defaultValues = {
-		dayOfWeek: meal?.dayOfWeek,
+		dayOfWeek: forcedDayOfWeek || meal?.dayOfWeek,
 		timeOfDay: meal?.timeOfDay,
 		recipeId,
+	};
+
+	const forcedDayOfWeekSelection: DropdownSelection = {
+		value: forcedDayOfWeek || "",
+		label: capitalize(forcedDayOfWeek || ""),
 	};
 
 	const [notes, setNotes] = useState((meal && meal.notes) || "");
@@ -62,7 +79,9 @@ export default function MealForm({
 
 		const payload: NewMeal | EditMeal = {
 			_id: mealId,
-			dayOfWeek: dayOfWeekDropdownControls.selection.value as DayOfWeek,
+			dayOfWeek:
+				forcedDayOfWeek ||
+				(dayOfWeekDropdownControls.selection.value as DayOfWeek),
 			recipeId: recipeDropdownControls.selection.value,
 			timeOfDay: timeOfDayDropdownControls.selection.value as TimeOfDay,
 			notes,
@@ -72,18 +91,37 @@ export default function MealForm({
 			payload as any
 		)) as MutationResult;
 
-		if (result.isSuccess) router.push("/meals");
+		if (result.isSuccess && !forcedDayOfWeek) {
+			router.push("/meals");
+		}
+		if (result.isSuccess && forcedDayOfWeek) {
+			setIsModalOpen && setIsModalOpen(false);
+		}
 	};
 
 	return (
 		<Form props={{ onSubmit }}>
-			<BackButton isHoverWhite />
+			{!forcedDayOfWeek ? (
+				<BackButton isHoverWhite />
+			) : (
+				<Button
+					variant="secondary"
+					classOverrides="self-start hover:bg-white"
+					props={{
+						type: "button",
+						onClick: () => setIsModalOpen && setIsModalOpen(false),
+					}}
+				>
+					Back
+				</Button>
+			)}
 			<Heading variant="h3">
 				{pathname.includes("edit") ? "Edit meal" : "New meal"}
 			</Heading>
 			<Dropdown
 				disabled={mutation.isLoading}
 				label="Day of week"
+				forcedSelection={forcedDayOfWeek ? forcedDayOfWeekSelection : null}
 				selections={daysOfWeek}
 				controls={controls.dayOfWeekDropdownControls}
 			/>

@@ -8,7 +8,7 @@ import { editMealMutator as mutationFn } from "@/lib/mutators";
 export default function EditMeal({ id }: { id: string }) {
 	const userQuery = useUserQuery();
 
-	if (userQuery.isLoading) return <p>Loading your data...</p>;
+	if (userQuery.isLoading) return <p className="text-center">Loading your data...</p>;
 
 	if (userQuery.isError) {
 		return <ErrorText>{(userQuery.error as Error).message}</ErrorText>;

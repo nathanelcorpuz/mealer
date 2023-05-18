@@ -26,7 +26,7 @@ export default function Meals() {
 				/>
 			</div>
 			<div>
-				{userQuery.isLoading && <p>Loading your meals...</p>}
+				{userQuery.isLoading && <p className="text-center">Loading your meals...</p>}
 				{userQuery.isSuccess && (
 					<ul className="flex flex-col">
 						{(userQuery.data.meals as Meal[]).map((meal) => (

@@ -11,7 +11,11 @@ export default function EditRecipe({ slug }: { slug: string }) {
 	const recipeNameFromSlug = slug.replace(/-/g, " ");
 
 	if (recipeQuery.isLoading) {
-		return <Heading variant="h4">Loading {recipeNameFromSlug}</Heading>;
+		return (
+			<Heading variant="h4" classOverrides="text-center">
+				Loading {recipeNameFromSlug}
+			</Heading>
+		);
 	}
 
 	if (recipeQuery.isError) {

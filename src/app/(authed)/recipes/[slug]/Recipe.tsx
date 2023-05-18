@@ -20,7 +20,9 @@ export default function Recipe({ slug }: { slug: string }) {
 	return (
 		<ContentWrapper>
 			{recipe.isLoading && (
-				<Heading variant="h5">Loading {slug.replace(/-/g, " ")}...</Heading>
+				<Heading variant="h5" classOverrides="text-center">
+					Loading {slug.replace(/-/g, " ")}...
+				</Heading>
 			)}
 			{recipe.isSuccess && recipeData !== undefined && (
 				<div className="flex flex-col gap-[30px] items-start">

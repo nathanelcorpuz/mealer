@@ -6,6 +6,7 @@ import getMealPlan from "./_utils/getMealPlan";
 import { MealPlan } from "@/lib/types";
 import { daysOfWeek } from "@/lib/constants";
 import WeeklyMealPlan from "./_components/WeeklyMealPlan";
+import TomorrowsMealPlan from "./_components/TomorrowMealPlan";
 
 export default function Home() {
 	const userQuery = useUserQuery();
@@ -15,9 +16,13 @@ export default function Home() {
 	}
 
 	if (userQuery.isSuccess) {
-		const mealPlan: MealPlan = getMealPlan(
+		const todaysMealPlan: MealPlan = getMealPlan(
 			userQuery.data,
 			daysOfWeek[new Date().getDay()]
+		);
+		const tomorrowsMealPlan: MealPlan = getMealPlan(
+			userQuery.data,
+			daysOfWeek[new Date().getDay() + 1]
 		);
 		return (
 			<section
@@ -25,7 +30,8 @@ export default function Home() {
 			 rounded-lg max-w-[550px] mx-auto
 			 p-8 border border-gray-300"
 			>
-				<TodaysMealPlan mealPlan={mealPlan} />
+				<TodaysMealPlan mealPlan={todaysMealPlan} />
+				<TomorrowsMealPlan mealPlan={tomorrowsMealPlan} />
 				<WeeklyMealPlan userData={userQuery.data} />
 			</section>
 		);

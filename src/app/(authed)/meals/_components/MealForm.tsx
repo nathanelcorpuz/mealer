@@ -21,6 +21,7 @@ import { usePathname, useRouter } from "next/navigation";
 import ErrorText from "@/components/ErrorText";
 import BackButton from "@/components/BackButton";
 import capitalize from "@/lib/capitalize";
+import Link from "next/link";
 
 export default function MealForm({
 	user,
@@ -92,7 +93,7 @@ export default function MealForm({
 		)) as MutationResult;
 
 		if (result.isSuccess && !forcedDayOfWeek) {
-			router.push("/meals");
+			router.back();
 		}
 		if (result.isSuccess && forcedDayOfWeek) {
 			setIsModalOpen && setIsModalOpen(false);
@@ -137,6 +138,11 @@ export default function MealForm({
 				selections={recipes}
 				controls={controls.recipeDropdownControls}
 			/>
+			{user.recipes.length === 0 ? (
+				<p className="text-sm italic">
+					No recipes yet, add one <Link className="font-bold text-emerald-700" href="/recipes/new">here</Link>
+				</p>
+			) : null}
 			<TextArea
 				labelText="Notes"
 				labelProps={{ htmlFor: "notes" }}

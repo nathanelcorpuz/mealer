@@ -4,6 +4,7 @@ import { Reducer, useReducer } from "react";
 
 const initialState: RecipeReducerState = {
 	name: "",
+	slug: "",
 	description: "",
 	directions: ["Sample direction 1", "Sample direction 2"],
 	ingredients: [

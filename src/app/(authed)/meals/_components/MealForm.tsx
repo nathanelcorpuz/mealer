@@ -102,23 +102,25 @@ export default function MealForm({
 
 	return (
 		<Form props={{ onSubmit }}>
-			{!forcedDayOfWeek ? (
-				<BackButton isHoverWhite />
-			) : (
-				<Button
-					variant="secondary"
-					classOverrides="self-start hover:bg-white"
-					props={{
-						type: "button",
-						onClick: () => setIsModalOpen && setIsModalOpen(false),
-					}}
-				>
-					Back
-				</Button>
-			)}
-			<Heading variant="h3">
-				{pathname.includes("edit") ? "Edit meal" : "New meal"}
-			</Heading>
+			<div className="flex justify-between">
+				<Heading variant="h3">
+					{pathname.includes("edit") ? "Edit meal" : "New meal"}
+				</Heading>
+				{!forcedDayOfWeek ? (
+					<BackButton isHoverWhite />
+				) : (
+					<Button
+						variant="secondary"
+						classOverrides="self-start hover:bg-white"
+						props={{
+							type: "button",
+							onClick: () => setIsModalOpen && setIsModalOpen(false),
+						}}
+					>
+						Back
+					</Button>
+				)}
+			</div>
 			<Dropdown
 				disabled={mutation.isLoading}
 				label="Day of week"
@@ -140,7 +142,10 @@ export default function MealForm({
 			/>
 			{user.recipes.length === 0 ? (
 				<p className="text-sm italic">
-					No recipes yet, add one <Link className="font-bold text-emerald-700" href="/recipes/new">here</Link>
+					No recipes yet, add one{" "}
+					<Link className="font-bold text-emerald-700" href="/recipes/new">
+						here
+					</Link>
 				</p>
 			) : null}
 			<TextArea

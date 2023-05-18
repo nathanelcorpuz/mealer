@@ -28,7 +28,7 @@ export default function Home() {
 			<section
 				className="flex flex-col gap-[40px] 
 			 rounded-lg max-w-[550px] mx-auto
-			 p-8 border border-gray-300"
+			 p-2 sm:p-8 border border-gray-300"
 			>
 				<TodaysMealPlan mealPlan={todaysMealPlan} />
 				<TomorrowsMealPlan mealPlan={tomorrowsMealPlan} />

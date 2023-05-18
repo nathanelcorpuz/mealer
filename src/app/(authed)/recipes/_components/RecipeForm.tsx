@@ -26,8 +26,10 @@ export default function RecipeForm({
 }) {
 	return (
 		<Form props={{ onSubmit }}>
-			<BackButton isHoverWhite />
-			<Heading variant="h3">{heading}</Heading>
+			<div className="flex justify-between">
+				<Heading variant="h3">{heading}</Heading>
+				<BackButton isHoverWhite />
+			</div>
 			<Input
 				labelText="Name"
 				labelProps={{ htmlFor: "name" }}

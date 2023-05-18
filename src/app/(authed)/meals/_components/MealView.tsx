@@ -11,8 +11,10 @@ export default function MealView({ meal }: { meal: Meal }) {
 	const directions = meal.recipeId.directions;
 	return (
 		<div className="flex flex-col gap-[20px] bg-gray-200 p-8 rounded-lg">
-			<BackButton isHoverWhite />
-			<Heading variant="h3">{meal.dayOfWeek} meal</Heading>
+			<div className="flex justify-between">
+				<Heading variant="h3">{meal.dayOfWeek} meal</Heading>
+				<BackButton isHoverWhite />
+			</div>
 			<MealViewItemContainer>
 				<p className="text-gray-500 text-sm">Schedule</p>
 				<p className="font-bold text-emerald-700 text-lg">

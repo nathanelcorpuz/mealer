@@ -44,15 +44,6 @@ export default function Meal({ id }: { id: string }) {
 		<section className="max-w-[550px] mx-auto">
 			{mealView}
 			<div className="flex flex-col gap-[10px] pt-[10px]">
-				{mutation.isLoading ? (
-					<Button classOverrides="w-[100%]" disabled={mutation.isLoading}>
-						Edit
-					</Button>
-				) : (
-					<Link className="block w-[100%]" href={`/meals/${id}/edit`}>
-						<Button classOverrides="w-[100%]">Edit</Button>
-					</Link>
-				)}
 				<YesNoConfirmation
 					heading="Delete this meal?"
 					onNo={() => router.push("/meals/" + id)}

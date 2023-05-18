@@ -26,8 +26,10 @@ export default function Recipe({ slug }: { slug: string }) {
 			)}
 			{recipe.isSuccess && recipeData !== undefined && (
 				<div className="flex flex-col gap-[30px] items-start">
-					<BackButton isHoverWhite />
-					<Heading variant="h3">{recipeData.name}</Heading>
+					<div className="flex justify-between w-[100%]">
+						<Heading variant="h3">{recipeData.name}</Heading>
+						<BackButton classOverrides="ms-auto" isHoverWhite />
+					</div>
 					<p>{recipeData.description}</p>
 					<div className="flex flex-col gap-[10px] w-[100%]">
 						<Heading variant="h5">Ingredients</Heading>

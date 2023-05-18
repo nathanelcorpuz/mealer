@@ -41,7 +41,7 @@ export default function MealPlanDisplay({
 					classOverrides={`${
 						size === "large"
 							? "py-2 px-4 text-sm mt-[10px] "
-							: "p-2 hover:bg-gray-100 border border-gray-400 py-1 text-xs"
+							: "p-2 hover:bg-gray-100 hover:border-emerald-600 hover:text-emerald-600 border border-gray-400 py-1 text-xs"
 					}`}
 					variant={size === "large" ? "primary" : "secondary"}
 					props={{ onClick: () => setIsModalOpen(true) }}

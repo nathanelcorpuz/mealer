@@ -4,10 +4,11 @@ import mongoose from "mongoose";
 
 const NODE_ENV = process.env.NODE_ENV;
 
-const MONGODB_URI =
-	NODE_ENV === "development"
-		? "mongodb://127.0.0.1:27017/mealer"
-		: (process.env.MONGODB_URI as string);
+// const MONGODB_URI =
+// 	NODE_ENV === "development"
+// 		? "mongodb://127.0.0.1:27017/mealer"
+// 		: (process.env.MONGODB_URI as string);
+const MONGODB_URI = process.env.MONGODB_URI as string;
 
 async function connectMongo() {
 	if (mongoose.connection.readyState === 1) {

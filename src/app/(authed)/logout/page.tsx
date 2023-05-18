@@ -6,7 +6,7 @@ import PageWrapper from "@/components/PageWrapper";
 import YesNoConfirmation from "@/components/YesNoConfirmation";
 import { useRouter } from "next/navigation";
 
-export default function logout() {
+export default function Logout() {
 	const logoutMutation = useMutation({ mutationFn });
 	const router = useRouter();
 

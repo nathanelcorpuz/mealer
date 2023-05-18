@@ -38,7 +38,7 @@ export default function FormRecipeDirections({
 							setIsEditModalOpen(true);
 						}}
 					>
-						<p className={`text-sm ${disabled && "opacity-[0.5]"}`}>
+						<p className={`text-start text-sm ${disabled && "opacity-[0.5]"}`}>
 							{direction}
 						</p>
 					</button>

@@ -5,13 +5,15 @@ import MealPlanDisplay from "./MealPlanDisplay";
 import getMealPlan from "../_utils/getMealPlan";
 
 export default function WeeklyMealPlan({ userData }: { userData: UserData }) {
-	return (
-		<section className="flex flex-col gap-[20px]">
-			<Heading variant="h4" classOverrides="text-gray-500">Weekly meal plan</Heading>
-			{daysOfWeek.map((day) => {
-				const dailyMealPlan = getMealPlan(userData, day);
-				return <MealPlanDisplay key={day} mealPlan={dailyMealPlan} />;
-			})}
-		</section>
-	);
+  return (
+    <section className="flex flex-col gap-[20px]">
+      <Heading variant="h4" classOverrides="text-gray-500">
+        Weekly meal plan
+      </Heading>
+      {daysOfWeek.map((day) => {
+        const dailyMealPlan = getMealPlan(userData, day);
+        return <MealPlanDisplay key={day} mealPlan={dailyMealPlan} />;
+      })}
+    </section>
+  );
 }

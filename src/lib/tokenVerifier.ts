@@ -5,28 +5,28 @@ import connectMongo from "@/db/connectMongo";
 import { HydratedDocument } from "mongoose";
 
 export default async function tokenVerifier() {
-	const cookies = getCookies();
-	const tokenCookie = cookies.get("token");
+  const cookies = getCookies();
+  const tokenCookie = cookies.get("token");
 
-	if (!tokenCookie) throw new Error("Unauthorized");
+  if (!tokenCookie) throw new Error("Unauthorized");
 
-	const verifiedToken: any = jwt.verify(
-		tokenCookie?.value as string,
-		process.env.ACCESS_TOKEN_SECRET as string
-	);
+  const verifiedToken: any = jwt.verify(
+    tokenCookie?.value as string,
+    process.env.ACCESS_TOKEN_SECRET as string
+  );
 
-	if (!verifiedToken) throw new Error("Invalid token");
+  if (!verifiedToken) throw new Error("Invalid token");
 
-	await connectMongo();
+  await connectMongo();
 
-	const userDoc: HydratedDocument<UserDocument> | null = await User.findById(
-		verifiedToken.userId,
-		{
-			password: 0,
-		}
-	);
+  const userDoc: HydratedDocument<UserDocument> | null = await User.findById(
+    verifiedToken.userId,
+    {
+      password: 0,
+    }
+  );
 
-	console.log("resource protected!");
+  console.log("resource protected!");
 
-	return userDoc;
+  return userDoc;
 }

@@ -5,17 +5,17 @@ import { Recipe as NewRecipe } from "@/lib/types";
 import { NextRequest, NextResponse } from "next/server";
 
 export default async function put(request: NextRequest) {
-	try {
-		await tokenVerifier();
-		const newRecipe: NewRecipe = await request.json();
+  try {
+    await tokenVerifier();
+    const newRecipe: NewRecipe = await request.json();
 
-		const updatedRecipeDoc = await Recipe.findByIdAndUpdate(
-			newRecipe._id,
-			newRecipe
-		);
+    const updatedRecipeDoc = await Recipe.findByIdAndUpdate(
+      newRecipe._id,
+      newRecipe
+    );
 
-		return NextResponse.json({ isSuccess: true });
-	} catch (error) {
-		return routeHandlerError(error as Error);
-	}
+    return NextResponse.json({ isSuccess: true });
+  } catch (error) {
+    return routeHandlerError(error as Error);
+  }
 }

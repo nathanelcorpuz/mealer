@@ -8,27 +8,27 @@ import byIngredient from "./utils/byIngredient";
 import byNameAndIngredient from "./utils/byNameAndIngredient";
 
 export const GET = async (request: NextRequest) => {
-	try {
-		const user: HydratedDocument<UserDocument> | null = await tokenVerifier();
+  try {
+    const user: HydratedDocument<UserDocument> | null = await tokenVerifier();
 
-		const { searchParams } = new URL(request.url);
-		const name = searchParams.get("name");
-		const ingredient = searchParams.get("ingredient");
+    const { searchParams } = new URL(request.url);
+    const name = searchParams.get("name");
+    const ingredient = searchParams.get("ingredient");
 
-		if (name && !ingredient) {
-			return byName({ user, name });
-		}
+    if (name && !ingredient) {
+      return byName({ user, name });
+    }
 
-		if (ingredient && !name) {
-			return byIngredient({ user, ingredient });
-		}
+    if (ingredient && !name) {
+      return byIngredient({ user, ingredient });
+    }
 
-		if (ingredient && name) {
-			return byNameAndIngredient({ user, name, ingredient });
-		}
+    if (ingredient && name) {
+      return byNameAndIngredient({ user, name, ingredient });
+    }
 
-		throw new Error("Must include a search criteria");
-	} catch (error) {
-		return routeHandlerError(error as Error);
-	}
+    throw new Error("Must include a search criteria");
+  } catch (error) {
+    return routeHandlerError(error as Error);
+  }
 };

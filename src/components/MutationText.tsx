@@ -1,7 +1,7 @@
 export default function MutationText({
-	children,
+  children,
 }: {
-	children: React.ReactNode;
+  children: React.ReactNode;
 }) {
-	return <p className="text-center">{children}</p>;
+  return <p className="text-center">{children}</p>;
 }

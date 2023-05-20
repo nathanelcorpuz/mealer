@@ -2,13 +2,13 @@ import PageWrapper from "@/components/PageWrapper";
 import Recipe from "./Recipe";
 
 export default function RecipeDetailsPage({
-	params,
+  params,
 }: {
-	params: { slug: string };
+  params: { slug: string };
 }) {
-	return (
-		<PageWrapper>
-			<Recipe slug={params.slug} />
-		</PageWrapper>
-	);
+  return (
+    <PageWrapper>
+      <Recipe slug={params.slug} />
+    </PageWrapper>
+  );
 }

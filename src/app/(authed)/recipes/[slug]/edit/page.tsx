@@ -2,13 +2,13 @@ import PageWrapper from "@/components/PageWrapper";
 import EditRecipe from "./EditRecipe";
 
 export default function EditRecipePage({
-	params,
+  params,
 }: {
-	params: { slug: string };
+  params: { slug: string };
 }) {
-	return (
-		<PageWrapper>
-			<EditRecipe slug={params.slug} />
-		</PageWrapper>
-	);
+  return (
+    <PageWrapper>
+      <EditRecipe slug={params.slug} />
+    </PageWrapper>
+  );
 }

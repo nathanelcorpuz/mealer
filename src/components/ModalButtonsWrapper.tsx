@@ -1,11 +1,11 @@
 export default function ModalButtonsWrapper({
-	children,
-	classOverrides,
+  children,
+  classOverrides,
 }: {
-	children: React.ReactNode;
-	classOverrides?: string;
+  children: React.ReactNode;
+  classOverrides?: string;
 }) {
-	return (
-		<div className={`flex justify-between ${classOverrides}`}>{children}</div>
-	);
+  return (
+    <div className={`flex justify-between ${classOverrides}`}>{children}</div>
+  );
 }

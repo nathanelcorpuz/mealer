@@ -10,33 +10,33 @@ import ErrorText from "@/components/ErrorText";
 import { FormEvent } from "react";
 
 export default function NewRecipe() {
-	const router = useRouter();
+  const router = useRouter();
 
-	const [state, dispatch] = useRecipeReducer();
+  const [state, dispatch] = useRecipeReducer();
 
-	const mutation = useMutation({ mutationFn });
+  const mutation = useMutation({ mutationFn });
 
-	const onSubmit = async (e: FormEvent) => {
-		e.preventDefault();
-		const result = await mutation.mutateAsync({
-			...state,
-			slug: slugify(state.name),
-		});
-		if (result.isSuccess) router.back();
-	};
+  const onSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    const result = await mutation.mutateAsync({
+      ...state,
+      slug: slugify(state.name),
+    });
+    if (result.isSuccess) router.back();
+  };
 
-	return (
-		<div>
-			<RecipeForm
-				disabled={mutation.isLoading}
-				heading="Add new recipe"
-				state={state}
-				dispatch={dispatch}
-				onSubmit={onSubmit}
-			/>
-			{mutation.isError && (
-				<ErrorText>{(mutation.error as Error).message}</ErrorText>
-			)}
-		</div>
-	);
+  return (
+    <div>
+      <RecipeForm
+        disabled={mutation.isLoading}
+        heading="Add new recipe"
+        state={state}
+        dispatch={dispatch}
+        onSubmit={onSubmit}
+      />
+      {mutation.isError && (
+        <ErrorText>{(mutation.error as Error).message}</ErrorText>
+      )}
+    </div>
+  );
 }

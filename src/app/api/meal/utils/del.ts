@@ -4,19 +4,19 @@ import tokenVerifier from "@/lib/tokenVerifier";
 import { NextRequest, NextResponse } from "next/server";
 
 export default async function del(request: NextRequest) {
-	try {
-		const user = await tokenVerifier();
-		if (!user) throw new Error("Account error");
+  try {
+    const user = await tokenVerifier();
+    if (!user) throw new Error("Account error");
 
-		const { searchParams } = new URL(request.url);
-		const _id = searchParams.get("_id");
+    const { searchParams } = new URL(request.url);
+    const _id = searchParams.get("_id");
 
-		await Meal.findByIdAndUpdate(_id, { isDeleted: true });
+    await Meal.findByIdAndUpdate(_id, { isDeleted: true });
 
-		await user.updateOne({ $pull: { recipeIds: _id } });
+    await user.updateOne({ $pull: { recipeIds: _id } });
 
-		return NextResponse.json({ isSuccess: true });
-	} catch (error) {
-		return routeHandlerError(error as Error);
-	}
+    return NextResponse.json({ isSuccess: true });
+  } catch (error) {
+    return routeHandlerError(error as Error);
+  }
 }

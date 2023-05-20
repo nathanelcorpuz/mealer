@@ -6,33 +6,33 @@ import { NextRequest, NextResponse } from "next/server";
 import { routeHandlerError } from "@/lib/routeHandlerError";
 
 export async function POST(request: NextRequest) {
-	try {
-		await connectMongo();
-		const { username, password } = await request.json();
+  try {
+    await connectMongo();
+    const { username, password } = await request.json();
 
-		const userDoc = await User.findOne({ username });
+    const userDoc = await User.findOne({ username });
 
-		if (!userDoc) throw new Error("Invalid username or password");
+    if (!userDoc) throw new Error("Invalid username or password");
 
-		const isPasswordCorrect = await bcrypt.compare(password, userDoc.password);
+    const isPasswordCorrect = await bcrypt.compare(password, userDoc.password);
 
-		if (!isPasswordCorrect) throw new Error("Invalid username or password");
+    if (!isPasswordCorrect) throw new Error("Invalid username or password");
 
-		const accessToken = jwt.sign(
-			{ userId: userDoc._id },
-			process.env.ACCESS_TOKEN_SECRET as string,
-			{
-				expiresIn: "7d",
-			}
-		);
+    const accessToken = jwt.sign(
+      { userId: userDoc._id },
+      process.env.ACCESS_TOKEN_SECRET as string,
+      {
+        expiresIn: "7d",
+      }
+    );
 
-		return new NextResponse(JSON.stringify({ isSuccess: true }), {
-			status: 200,
-			headers: {
-				"Set-Cookie": `token=${accessToken}; max-age=604800; httpOnly=true; path=/;`,
-			},
-		});
-	} catch (error) {
-		return routeHandlerError(error as Error);
-	}
+    return new NextResponse(JSON.stringify({ isSuccess: true }), {
+      status: 200,
+      headers: {
+        "Set-Cookie": `token=${accessToken}; max-age=604800; httpOnly=true; path=/;`,
+      },
+    });
+  } catch (error) {
+    return routeHandlerError(error as Error);
+  }
 }

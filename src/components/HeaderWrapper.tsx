@@ -1,9 +1,9 @@
 export default function HeaderWrapper({
-	children,
+  children,
 }: {
-	children: React.ReactNode;
+  children: React.ReactNode;
 }) {
-	return (
-		<header className="flex border-b-[1px] bg-gray-200">{children}</header>
-	);
+  return (
+    <header className="flex border-b-[1px] bg-gray-200">{children}</header>
+  );
 }

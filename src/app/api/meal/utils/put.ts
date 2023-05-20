@@ -5,16 +5,16 @@ import { EditMeal } from "@/lib/types";
 import { NextRequest, NextResponse } from "next/server";
 
 export default async function put(request: NextRequest) {
-	try {
-		const user = await tokenVerifier();
-		if (!user) throw new Error("Account error");
+  try {
+    const user = await tokenVerifier();
+    if (!user) throw new Error("Account error");
 
-		const newMeal: EditMeal = await request.json();
+    const newMeal: EditMeal = await request.json();
 
-		await Meal.findByIdAndUpdate(newMeal._id, newMeal);
+    await Meal.findByIdAndUpdate(newMeal._id, newMeal);
 
-		return NextResponse.json({ isSuccess: true });
-	} catch (error) {
-		return routeHandlerError(error as Error);
-	}
+    return NextResponse.json({ isSuccess: true });
+  } catch (error) {
+    return routeHandlerError(error as Error);
+  }
 }

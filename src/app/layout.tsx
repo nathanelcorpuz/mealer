@@ -21,7 +21,6 @@ export default function RootLayout({
           <div className="flex flex-col justify-between [min-height:100vh]">
             {children}
             <footer className="flex justify-center items-center gap-4 flex-col p-4 bg-gray-200 ">
-              <p className="italic">Staging</p>
               <p className="text-sm">
                 Made with 💚 by{" "}
                 <a

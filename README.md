@@ -48,7 +48,7 @@ MONGODB_URI=""
 
 ## Future features
 
-- Display username and logo
+- Display username and logo -- WIP
 - Filter recipes by ingredient
 - Search for recipe
 - Filter meals by day of week / time / recipe

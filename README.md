@@ -61,6 +61,10 @@ MONGODB_URI=""
 - Like / comment on recipes by other users
 - Recipe images
 
+## Known bugs
+
+- Base URL does not adjust based on environment (local vs staging vs prod): [Issue # 1](https://github.com/nathanelcorpuz/mealer/issues/1)
+
 ## Developer notes
 
 - I published this application after only 1 week to quickly showcase my skills as a full stack developer for prospective clients, as I'm looking for a job at the time of writing.

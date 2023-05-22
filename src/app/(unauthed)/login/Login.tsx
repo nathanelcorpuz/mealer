@@ -47,6 +47,11 @@ export default function Login() {
       {mutation.isError && (
         <ErrorText>{(mutation.error as Error).message}</ErrorText>
       )}
+      <div>
+        <p className="font-bold">Test user</p>
+        <p>User: testuser1</p>
+        <p>Password: Password1!</p>
+      </div>
     </Form>
   );
 }

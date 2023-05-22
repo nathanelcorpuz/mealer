@@ -16,7 +16,7 @@ export default function Header() {
   }
   return (
     <>
-      <HeaderWrapper>
+      <HeaderWrapper classOverrides="justify-between">
         <CustomLink href="/">
           {userQuery.isLoading ? "Loading..." : username}
         </CustomLink>
@@ -45,14 +45,26 @@ export default function Header() {
           >
             Close
           </button>
-          <div className="flex flex-col overflow-auto" onClick={() => setIsMenuOpen(false)}>
-            <CustomLink classOverrides="text-gray-100 py-4 lg:py-8 lg:px-[150px] lg:text-4xl" href="/">
+          <div
+            className="flex flex-col overflow-auto"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <CustomLink
+              classOverrides="text-gray-100 py-4 lg:py-8 lg:px-[150px] lg:text-4xl"
+              href="/"
+            >
               Home
             </CustomLink>
-            <CustomLink classOverrides="text-gray-100 py-4 lg:py-8 lg:px-[150px] lg:text-4xl" href="recipes">
+            <CustomLink
+              classOverrides="text-gray-100 py-4 lg:py-8 lg:px-[150px] lg:text-4xl"
+              href="recipes"
+            >
               Recipes
             </CustomLink>
-            <CustomLink classOverrides="text-gray-100 py-4 lg:py-8 lg:px-[150px] lg:text-4xl" href="meals">
+            <CustomLink
+              classOverrides="text-gray-100 py-4 lg:py-8 lg:px-[150px] lg:text-4xl"
+              href="meals"
+            >
               Meals
             </CustomLink>
             <CustomLink

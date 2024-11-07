@@ -19,7 +19,7 @@ export default async function del(request: NextRequest) {
 
     await user?.updateOne({ isDeleted: true });
 
-    return NextResponse.json({ success: true, message: "Recipe deleted" });
+    return NextResponse.json({ isSuccess: true, message: "Recipe deleted" });
   } catch (error) {
     return routeHandlerError(error as Error);
   }
